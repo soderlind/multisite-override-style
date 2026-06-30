@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-06-30
+
+### Added
+
+- GitHub updater for automatic plugin updates from GitHub releases.
+- GitHub Actions workflows for release builds.
+- Issue templates (bug report, feature request).
+
+### Changed
+
+- Updated installation guide with GitHub release instructions.
+
 ## [0.2.0] - 2026-06-30
 
 ### Changed

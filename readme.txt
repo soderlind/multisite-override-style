@@ -4,7 +4,7 @@ Tags: multisite, network, css, theme.json, branding, global styles
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 0.2.0
+Stable tag: 0.3.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,12 @@ Yes. Click **Preview on site** to open a new tab with your unsaved changes appli
 5. Revision history with one-click restore
 
 == Changelog ==
+
+= 0.3.0 =
+* Add GitHub updater for automatic plugin updates from GitHub releases.
+* Add GitHub Actions workflows for release builds.
+* Add issue templates (bug report, feature request).
+* Update installation guide with GitHub release instructions.
 
 = 0.2.0 =
 * Move admin menu from Settings to Themes in Network Admin
