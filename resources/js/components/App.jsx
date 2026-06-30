@@ -3,6 +3,7 @@ import { Spinner, Notice, TabPanel, Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import CssEditor from './CssEditor';
 import ThemeJsonEditor from './ThemeJsonEditor';
+import ThemeOverrides from './ThemeOverrides';
 import ExemptionList from './ExemptionList';
 import RevisionHistory from './RevisionHistory';
 import ImportExport from './ImportExport';
@@ -11,6 +12,10 @@ import {
 	saveSettings,
 	createPreview,
 	discardPreview,
+	getNetworkThemes,
+	getThemeOverrides,
+	saveThemeOverride,
+	deleteThemeOverride,
 } from '../api';
 
 export default function App() {
@@ -19,6 +24,16 @@ export default function App() {
 	const [ saving, setSaving ] = useState( false );
 	const [ saved, setSaved ] = useState( false );
 	const [ previewToken, setPreviewToken ] = useState( null );
+	const [ activeTab, setActiveTab ] = useState( 'css' );
+
+	// Theme overrides state (lifted from ThemeOverrides component).
+	const [ themes, setThemes ] = useState( [] );
+	const [ themeOverrides, setThemeOverrides ] = useState( {} );
+	const [ dirtyThemeOverrides, setDirtyThemeOverrides ] = useState(
+		new Set()
+	);
+	const [ themesLoading, setThemesLoading ] = useState( true );
+	const [ deleting, setDeleting ] = useState( false );
 
 	const load = useCallback( async () => {
 		try {
@@ -32,16 +47,48 @@ export default function App() {
 		}
 	}, [] );
 
+	const loadThemes = useCallback( async () => {
+		setThemesLoading( true );
+		try {
+			const [ themesData, overridesData ] = await Promise.all( [
+				getNetworkThemes(),
+				getThemeOverrides(),
+			] );
+			setThemes( themesData );
+			setThemeOverrides( overridesData );
+		} catch ( e ) {
+			setError(
+				e.message ??
+					__(
+						'Failed to load theme data.',
+						'multisite-override-style'
+					)
+			);
+		} finally {
+			setThemesLoading( false );
+		}
+	}, [] );
+
 	useEffect( () => {
 		load();
-	}, [ load ] );
+		loadThemes();
+	}, [ load, loadThemes ] );
 
 	const handleSave = async () => {
 		setSaving( true );
 		setSaved( false );
 		try {
+			// Save global settings.
 			const updated = await saveSettings( settings );
 			setSettings( updated );
+
+			// Save any dirty theme overrides.
+			const savePromises = [ ...dirtyThemeOverrides ].map( ( slug ) =>
+				saveThemeOverride( slug, themeOverrides[ slug ] )
+			);
+			await Promise.all( savePromises );
+			setDirtyThemeOverrides( new Set() );
+
 			setSaved( true );
 			setTimeout( () => setSaved( false ), 3000 );
 		} catch ( e ) {
@@ -50,6 +97,38 @@ export default function App() {
 			);
 		} finally {
 			setSaving( false );
+		}
+	};
+
+	const handleThemeOverrideChange = ( slug, override ) => {
+		setThemeOverrides( {
+			...themeOverrides,
+			[ slug ]: override,
+		} );
+		setDirtyThemeOverrides( new Set( [ ...dirtyThemeOverrides, slug ] ) );
+	};
+
+	const handleThemeOverrideDelete = async ( slug ) => {
+		setDeleting( true );
+		try {
+			await deleteThemeOverride( slug );
+			const newOverrides = { ...themeOverrides };
+			delete newOverrides[ slug ];
+			setThemeOverrides( newOverrides );
+
+			// Remove from dirty set if present.
+			const newDirty = new Set( dirtyThemeOverrides );
+			newDirty.delete( slug );
+			setDirtyThemeOverrides( newDirty );
+
+			setSaved( true );
+			setTimeout( () => setSaved( false ), 3000 );
+		} catch ( e ) {
+			setError(
+				e.message ?? __( 'Delete failed.', 'multisite-override-style' )
+			);
+		} finally {
+			setDeleting( false );
 		}
 	};
 
@@ -104,6 +183,10 @@ export default function App() {
 			name: 'theme-json',
 			title: __( 'theme.json', 'multisite-override-style' ),
 		},
+		{
+			name: 'theme-overrides',
+			title: __( 'Theme Overrides', 'multisite-override-style' ),
+		},
 		{ name: 'sites', title: __( 'Sites', 'multisite-override-style' ) },
 		{ name: 'history', title: __( 'History', 'multisite-override-style' ) },
 		{
@@ -111,6 +194,11 @@ export default function App() {
 			title: __( 'Import / Export', 'multisite-override-style' ),
 		},
 	];
+
+	const showFooter =
+		activeTab === 'css' ||
+		activeTab === 'theme-json' ||
+		activeTab === 'theme-overrides';
 
 	return (
 		<div className="mos-app">
@@ -134,7 +222,7 @@ export default function App() {
 				) }
 			</div>
 
-			<TabPanel tabs={ tabs }>
+			<TabPanel tabs={ tabs } onSelect={ setActiveTab }>
 				{ ( tab ) => (
 					<div className="mos-tab-content">
 						{ tab.name === 'css' && (
@@ -148,9 +236,22 @@ export default function App() {
 						{ tab.name === 'theme-json' && (
 							<ThemeJsonEditor
 								value={ settings.theme_json }
-								onChange={ ( theme_json ) =>
-									setSettings( { ...settings, theme_json } )
+								onChange={ ( themeJson ) =>
+									setSettings( {
+										...settings,
+										theme_json: themeJson,
+									} )
 								}
+							/>
+						) }
+						{ tab.name === 'theme-overrides' && (
+							<ThemeOverrides
+								themes={ themes }
+								overrides={ themeOverrides }
+								onOverrideChange={ handleThemeOverrideChange }
+								onDelete={ handleThemeOverrideDelete }
+								loading={ themesLoading }
+								deleting={ deleting }
 							/>
 						) }
 						{ tab.name === 'sites' && (
@@ -166,24 +267,31 @@ export default function App() {
 				) }
 			</TabPanel>
 
-			<div className="mos-app__footer">
-				<Button
-					variant="primary"
-					onClick={ handleSave }
-					isBusy={ saving }
-					disabled={ saving }
-				>
-					{ __( 'Save', 'multisite-override-style' ) }
-				</Button>
+			{ showFooter && (
+				<div className="mos-app__footer">
+					<Button
+						variant="primary"
+						onClick={ handleSave }
+						isBusy={ saving }
+						disabled={ saving }
+					>
+						{ __( 'Save', 'multisite-override-style' ) }
+					</Button>
 
-				<Button
-					variant="secondary"
-					onClick={ handlePreview }
-					disabled={ saving }
-				>
-					{ __( 'Preview on site', 'multisite-override-style' ) }
-				</Button>
-			</div>
+					{ ( activeTab === 'css' || activeTab === 'theme-json' ) && (
+						<Button
+							variant="secondary"
+							onClick={ handlePreview }
+							disabled={ saving }
+						>
+							{ __(
+								'Preview on site',
+								'multisite-override-style'
+							) }
+						</Button>
+					) }
+				</div>
+			) }
 		</div>
 	);
 }

@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.2] - 2026-06-30
+
+### Changed
+
+- Refactor: Unified Save button now saves theme overrides with global settings.
+
+## [0.4.1] - 2026-06-30
+
+### Fixed
+
+- Add `__next40pxDefaultSize` to SelectControl for WP 7.1 compatibility.
+- Hide global Save/Preview buttons on Theme Overrides tab.
+- Make CSS enqueue conditional, support multiple hook name variants.
+
+### Added
+
+- WP-CLI acceptance tests with class loading verification.
+
+## [0.4.0] - 2026-06-30
+
+### Added
+
+- **Theme-specific overrides**: Add CSS and theme.json overrides that apply only to specific themes. These are applied after the global overrides, allowing theme-specific customizations while maintaining network-wide brand consistency.
+- New "Theme Overrides" tab in admin UI with theme selector dropdown.
+- REST API endpoints: `GET /network-themes`, `GET/POST/DELETE /theme-overrides/{slug}`.
+- Theme overrides included in export/import functionality.
+
 ## [0.3.2] - 2026-06-30
 
 ### Fixed

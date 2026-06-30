@@ -48,7 +48,13 @@ final class NetworkAdminPage {
 	}
 
 	public function enqueue_assets( string $hook ): void {
-		if ( $hook !== 'appearance_page_' . self::MENU_SLUG ) {
+		// Network admin uses different hook format
+		$expected_hooks = [
+			'appearance_page_' . self::MENU_SLUG,
+			'themes_page_' . self::MENU_SLUG,
+		];
+
+		if ( ! in_array( $hook, $expected_hooks, true ) ) {
 			return;
 		}
 
@@ -71,12 +77,19 @@ final class NetworkAdminPage {
 			true,
 		);
 
-		wp_enqueue_style(
-			'mos-admin',
-			MOS_PLUGIN_URL . 'build/index.css',
-			[ 'wp-components' ],
-			$asset['version'],
-		);
+		// Only enqueue CSS if it exists.
+		$css_file = MOS_PLUGIN_DIR . 'build/index.css';
+		if ( file_exists( $css_file ) ) {
+			wp_enqueue_style(
+				'mos-admin',
+				MOS_PLUGIN_URL . 'build/index.css',
+				[ 'wp-components' ],
+				$asset['version'],
+			);
+		} else {
+			// Just load wp-components styles.
+			wp_enqueue_style( 'wp-components' );
+		}
 
 		wp_localize_script(
 			'mos-admin',
