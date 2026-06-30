@@ -1,5 +1,12 @@
 import { useState } from '@wordpress/element';
-import { Button, TextControl, ColorPicker, Popover, Panel, PanelBody } from '@wordpress/components';
+import {
+	Button,
+	TextControl,
+	ColorPicker,
+	Popover,
+	Panel,
+	PanelBody,
+} from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 function ColorRow( { color, onChange, onRemove } ) {
@@ -18,7 +25,9 @@ function ColorRow( { color, onChange, onRemove } ) {
 				<Popover onClose={ () => setPickerOpen( false ) }>
 					<ColorPicker
 						color={ color.color }
-						onChange={ ( hex ) => onChange( { ...color, color: hex } ) }
+						onChange={ ( hex ) =>
+							onChange( { ...color, color: hex } )
+						}
 						enableAlpha={ false }
 					/>
 				</Popover>
@@ -64,13 +73,18 @@ export default function ColorPaletteField( { colors, onChange } ) {
 
 	return (
 		<Panel>
-			<PanelBody title={ __( 'Color Palette', 'multisite-override-style' ) } initialOpen={ true }>
+			<PanelBody
+				title={ __( 'Color Palette', 'multisite-override-style' ) }
+				initialOpen={ true }
+			>
 				<div className="mos-color-palette">
 					{ colors.map( ( color, index ) => (
 						<ColorRow
 							key={ index }
 							color={ color }
-							onChange={ ( updated ) => updateColor( index, updated ) }
+							onChange={ ( updated ) =>
+								updateColor( index, updated )
+							}
 							onRemove={ () => removeColor( index ) }
 						/>
 					) ) }

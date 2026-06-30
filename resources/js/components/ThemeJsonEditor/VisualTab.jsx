@@ -1,15 +1,20 @@
-import { __ } from '@wordpress/i18n';
 import ColorPalette from '../visual-fields/ColorPalette';
 import Typography from '../visual-fields/Typography';
 import Spacing from '../visual-fields/Spacing';
 import BorderControls from '../visual-fields/BorderControls';
 
 function getPath( obj, ...keys ) {
-	return keys.reduce( ( acc, key ) => ( acc && acc[ key ] !== undefined ? acc[ key ] : undefined ), obj );
+	return keys.reduce(
+		( acc, key ) =>
+			acc && acc[ key ] !== undefined ? acc[ key ] : undefined,
+		obj
+	);
 }
 
 function setPath( obj, keys, value ) {
-	if ( keys.length === 0 ) return value;
+	if ( keys.length === 0 ) {
+		return value;
+	}
 	const [ head, ...tail ] = keys;
 	return {
 		...obj,
@@ -25,27 +30,50 @@ export default function VisualTab( { value, onChange } ) {
 	return (
 		<div className="mos-visual-tab">
 			<ColorPalette
-				colors={ getPath( value, 'settings', 'color', 'palette' ) ?? [] }
-				onChange={ ( colors ) => update( [ 'settings', 'color', 'palette' ], colors ) }
+				colors={
+					getPath( value, 'settings', 'color', 'palette' ) ?? []
+				}
+				onChange={ ( colors ) =>
+					update( [ 'settings', 'color', 'palette' ], colors )
+				}
 			/>
 
 			<Typography
-				fontFamilies={ getPath( value, 'settings', 'typography', 'fontFamilies' ) ?? [] }
-				fontSizes={ getPath( value, 'settings', 'typography', 'fontSizes' ) ?? [] }
-				onChange={ ( typography ) => update( [ 'settings', 'typography' ], {
-					...( getPath( value, 'settings', 'typography' ) ?? {} ),
-					...typography,
-				} ) }
+				fontFamilies={
+					getPath(
+						value,
+						'settings',
+						'typography',
+						'fontFamilies'
+					) ?? []
+				}
+				fontSizes={
+					getPath( value, 'settings', 'typography', 'fontSizes' ) ??
+					[]
+				}
+				onChange={ ( typography ) =>
+					update( [ 'settings', 'typography' ], {
+						...( getPath( value, 'settings', 'typography' ) ?? {} ),
+						...typography,
+					} )
+				}
 			/>
 
 			<Spacing
-				spacingSizes={ getPath( value, 'settings', 'spacing', 'spacingSizes' ) ?? [] }
-				onChange={ ( sizes ) => update( [ 'settings', 'spacing', 'spacingSizes' ], sizes ) }
+				spacingSizes={
+					getPath( value, 'settings', 'spacing', 'spacingSizes' ) ??
+					[]
+				}
+				onChange={ ( sizes ) =>
+					update( [ 'settings', 'spacing', 'spacingSizes' ], sizes )
+				}
 			/>
 
 			<BorderControls
 				border={ getPath( value, 'styles', 'border' ) ?? {} }
-				onChange={ ( border ) => update( [ 'styles', 'border' ], border ) }
+				onChange={ ( border ) =>
+					update( [ 'styles', 'border' ], border )
+				}
 			/>
 		</div>
 	);

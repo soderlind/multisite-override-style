@@ -6,7 +6,9 @@ import { json as jsonLang } from '@codemirror/lang-json';
 import { oneDark } from '@codemirror/theme-one-dark';
 
 export default function RawJsonTab( { value, onChange } ) {
-	const [ raw, setRaw ]       = useState( () => JSON.stringify( value ?? {}, null, 2 ) );
+	const [ raw, setRaw ] = useState( () =>
+		JSON.stringify( value ?? {}, null, 2 )
+	);
 	const [ jsonError, setJsonError ] = useState( null );
 
 	useEffect( () => {
@@ -20,14 +22,21 @@ export default function RawJsonTab( { value, onChange } ) {
 			setJsonError( null );
 			onChange( parsed );
 		} catch {
-			setJsonError( __( 'Invalid JSON — changes will not be saved until fixed.', 'multisite-override-style' ) );
+			setJsonError(
+				__(
+					'Invalid JSON — changes will not be saved until fixed.',
+					'multisite-override-style'
+				)
+			);
 		}
 	};
 
 	return (
 		<div className="mos-raw-json-tab">
 			{ jsonError && (
-				<Notice status="warning" isDismissible={ false }>{ jsonError }</Notice>
+				<Notice status="warning" isDismissible={ false }>
+					{ jsonError }
+				</Notice>
 			) }
 
 			<CodeMirror

@@ -16,9 +16,15 @@ export default function Spacing( { spacingSizes, onChange } ) {
 
 	return (
 		<Panel>
-			<PanelBody title={ __( 'Spacing Scale', 'multisite-override-style' ) } initialOpen={ false }>
+			<PanelBody
+				title={ __( 'Spacing Scale', 'multisite-override-style' ) }
+				initialOpen={ false }
+			>
 				<p className="description">
-					{ __( 'Define named spacing sizes used for padding, margin, and gap presets.', 'multisite-override-style' ) }
+					{ __(
+						'Define named spacing sizes used for padding, margin, and gap presets.',
+						'multisite-override-style'
+					) }
 				</p>
 
 				{ spacingSizes.map( ( item, i ) => (
@@ -34,12 +40,19 @@ export default function Spacing( { spacingSizes, onChange } ) {
 							onChange={ ( v ) => update( i, 'slug', v ) }
 						/>
 						<TextControl
-							label={ __( 'Size (CSS value)', 'multisite-override-style' ) }
+							label={ __(
+								'Size (CSS value)',
+								'multisite-override-style'
+							) }
 							value={ item.size }
 							onChange={ ( v ) => update( i, 'size', v ) }
 							placeholder="e.g. 1rem, 16px"
 						/>
-						<Button isDestructive variant="tertiary" onClick={ () => remove( i ) }>
+						<Button
+							isDestructive
+							variant="tertiary"
+							onClick={ () => remove( i ) }
+						>
 							{ __( 'Remove', 'multisite-override-style' ) }
 						</Button>
 					</div>

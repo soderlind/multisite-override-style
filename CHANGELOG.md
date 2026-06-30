@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-06-30
+
+### Changed
+
+- Move admin menu from Settings to Themes in Network Admin
+
+### Fixed
+
+- Fix REST controller registration to work outside admin context
+
 ## [1.0.0] - 2026-06-30
 
 ### Added

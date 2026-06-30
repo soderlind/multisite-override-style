@@ -6,13 +6,18 @@ import ThemeJsonEditor from './ThemeJsonEditor';
 import ExemptionList from './ExemptionList';
 import RevisionHistory from './RevisionHistory';
 import ImportExport from './ImportExport';
-import { getSettings, saveSettings, createPreview, discardPreview } from '../api';
+import {
+	getSettings,
+	saveSettings,
+	createPreview,
+	discardPreview,
+} from '../api';
 
 export default function App() {
 	const [ settings, setSettings ] = useState( null );
-	const [ error, setError ]       = useState( null );
-	const [ saving, setSaving ]     = useState( false );
-	const [ saved, setSaved ]       = useState( false );
+	const [ error, setError ] = useState( null );
+	const [ saving, setSaving ] = useState( false );
+	const [ saved, setSaved ] = useState( false );
 	const [ previewToken, setPreviewToken ] = useState( null );
 
 	const load = useCallback( async () => {
@@ -20,11 +25,16 @@ export default function App() {
 			const data = await getSettings();
 			setSettings( data );
 		} catch ( e ) {
-			setError( e.message ?? __( 'Failed to load settings.', 'multisite-override-style' ) );
+			setError(
+				e.message ??
+					__( 'Failed to load settings.', 'multisite-override-style' )
+			);
 		}
 	}, [] );
 
-	useEffect( () => { load(); }, [ load ] );
+	useEffect( () => {
+		load();
+	}, [ load ] );
 
 	const handleSave = async () => {
 		setSaving( true );
@@ -35,7 +45,9 @@ export default function App() {
 			setSaved( true );
 			setTimeout( () => setSaved( false ), 3000 );
 		} catch ( e ) {
-			setError( e.message ?? __( 'Save failed.', 'multisite-override-style' ) );
+			setError(
+				e.message ?? __( 'Save failed.', 'multisite-override-style' )
+			);
 		} finally {
 			setSaving( false );
 		}
@@ -47,14 +59,16 @@ export default function App() {
 				await discardPreview( previewToken );
 			}
 			const { token, preview_url } = await createPreview( {
-				css:        settings.css,
+				css: settings.css,
 				theme_json: settings.theme_json,
-				site_url:   window.mosAdminData?.siteUrl ?? '',
+				site_url: window.mosAdminData?.siteUrl ?? '',
 			} );
 			setPreviewToken( token );
 			window.open( preview_url, '_blank', 'noopener,noreferrer' );
 		} catch ( e ) {
-			setError( e.message ?? __( 'Preview failed.', 'multisite-override-style' ) );
+			setError(
+				e.message ?? __( 'Preview failed.', 'multisite-override-style' )
+			);
 		}
 	};
 
@@ -73,28 +87,45 @@ export default function App() {
 	if ( ! settings ) {
 		return (
 			<div style={ { padding: '2rem' } }>
-				{ error
-					? <Notice status="error" isDismissible={ false }>{ error }</Notice>
-					: <Spinner /> }
+				{ error ? (
+					<Notice status="error" isDismissible={ false }>
+						{ error }
+					</Notice>
+				) : (
+					<Spinner />
+				) }
 			</div>
 		);
 	}
 
 	const tabs = [
-		{ name: 'css',        title: __( 'CSS', 'multisite-override-style' ) },
-		{ name: 'theme-json', title: __( 'theme.json', 'multisite-override-style' ) },
-		{ name: 'sites',      title: __( 'Sites', 'multisite-override-style' ) },
-		{ name: 'history',    title: __( 'History', 'multisite-override-style' ) },
-		{ name: 'import',     title: __( 'Import / Export', 'multisite-override-style' ) },
+		{ name: 'css', title: __( 'CSS', 'multisite-override-style' ) },
+		{
+			name: 'theme-json',
+			title: __( 'theme.json', 'multisite-override-style' ),
+		},
+		{ name: 'sites', title: __( 'Sites', 'multisite-override-style' ) },
+		{ name: 'history', title: __( 'History', 'multisite-override-style' ) },
+		{
+			name: 'import',
+			title: __( 'Import / Export', 'multisite-override-style' ),
+		},
 	];
 
 	return (
 		<div className="mos-app">
 			<div className="mos-app__header">
-				<h1>{ __( 'Network Style Override', 'multisite-override-style' ) }</h1>
+				<h1>
+					{ __(
+						'Network Style Override',
+						'multisite-override-style'
+					) }
+				</h1>
 
 				{ error && (
-					<Notice status="error" onRemove={ () => setError( null ) }>{ error }</Notice>
+					<Notice status="error" onRemove={ () => setError( null ) }>
+						{ error }
+					</Notice>
 				) }
 				{ saved && (
 					<Notice status="success" isDismissible={ false }>
@@ -109,13 +140,17 @@ export default function App() {
 						{ tab.name === 'css' && (
 							<CssEditor
 								value={ settings.css }
-								onChange={ ( css ) => setSettings( { ...settings, css } ) }
+								onChange={ ( css ) =>
+									setSettings( { ...settings, css } )
+								}
 							/>
 						) }
 						{ tab.name === 'theme-json' && (
 							<ThemeJsonEditor
 								value={ settings.theme_json }
-								onChange={ ( theme_json ) => setSettings( { ...settings, theme_json } ) }
+								onChange={ ( theme_json ) =>
+									setSettings( { ...settings, theme_json } )
+								}
 							/>
 						) }
 						{ tab.name === 'sites' && (
@@ -125,7 +160,7 @@ export default function App() {
 							<RevisionHistory onRestored={ handleRestored } />
 						) }
 						{ tab.name === 'import' && (
-							<ImportExport settings={ settings } onImported={ handleImported } />
+							<ImportExport onImported={ handleImported } />
 						) }
 					</div>
 				) }
