@@ -15,6 +15,5 @@
 *.swp
 .DS_Store
 
-# npm / yarn
-package-lock.json
+# yarn (using npm)
 yarn.lock
