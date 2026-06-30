@@ -1,0 +1,28 @@
+{
+	"name": "multisite-override-style",
+	"version": "1.0.0",
+	"description": "Network-wide CSS and theme.json overrides for WordPress Multisite",
+	"license": "GPL-2.0-or-later",
+	"private": true,
+	"scripts": {
+		"build": "wp-scripts build",
+		"start": "wp-scripts start",
+		"lint:js": "wp-scripts lint-js resources/js",
+		"lint:style": "wp-scripts lint-style resources"
+	},
+	"dependencies": {
+		"@codemirror/lang-css": "^6.3",
+		"@codemirror/lang-json": "^6.0",
+		"@codemirror/theme-one-dark": "^6.1",
+		"@uiw/react-codemirror": "^4.23",
+		"@wordpress/api-fetch": "*",
+		"@wordpress/components": "*",
+		"@wordpress/compose": "*",
+		"@wordpress/element": "*",
+		"@wordpress/i18n": "*",
+		"@wordpress/notices": "*"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^30.0"
+	}
+}
