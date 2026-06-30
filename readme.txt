@@ -4,7 +4,7 @@ Tags: multisite, network, css, theme.json, branding, global styles
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 0.7.0
+Stable tag: 0.7.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,9 @@ Yes. Click **Preview on site** to open a new tab with your unsaved changes appli
 5. Revision history with one-click restore
 
 == Changelog ==
+
+= 0.7.1 =
+* Fix: Update JS container ID to match PHP (mos-admin-app → nso-admin-app).
 
 = 0.7.0 =
 * BREAKING: Renamed plugin from "Multisite Override Style" to "Network Style Override".

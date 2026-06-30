@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.1] - 2026-06-30
+
+### Fixed
+
+- Update JS container ID to match PHP (mos-admin-app → nso-admin-app).
+
 ## [0.7.0] - 2026-06-30
 
 ### Changed (BREAKING)
