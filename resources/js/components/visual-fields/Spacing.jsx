@@ -1,6 +1,5 @@
 import { useState } from '@wordpress/element';
 import {
-	Button,
 	TextControl,
 	Panel,
 	PanelBody,
@@ -36,9 +35,6 @@ const CSS_UNITS = [
 export default function Spacing( { spacingSizes, onChange, lockedSlugs = new Set() } ) {
 	const [ slugsEdited, setSlugsEdited ] = useState( {} );
 
-	const add = () =>
-		onChange( [ ...spacingSizes, { name: '', slug: '', size: '16px' } ] );
-
 	const updateName = ( index, name ) => {
 		const next = [ ...spacingSizes ];
 		const isLocked = lockedSlugs.has( next[ index ].slug );
@@ -64,9 +60,6 @@ export default function Spacing( { spacingSizes, onChange, lockedSlugs = new Set
 		next[ index ] = { ...next[ index ], [ field ]: val };
 		onChange( next );
 	};
-
-	const remove = ( index ) =>
-		onChange( spacingSizes.filter( ( _, i ) => i !== index ) );
 
 	return (
 		<Panel>
@@ -138,28 +131,12 @@ export default function Spacing( { spacingSizes, onChange, lockedSlugs = new Set
 												/>
 											</HStack>
 										</FlexBlock>
-										<FlexItem>
-											<Button
-												icon="trash"
-												isDestructive
-												variant="tertiary"
-												onClick={ () => remove( i ) }
-												label={ __( 'Remove', 'multisite-override-style' ) }
-												size="compact"
-											/>
-										</FlexItem>
 									</Flex>
 								</CardBody>
 							</Card>
 						);
 					} ) }
 				</VStack>
-
-				<div style={ { marginTop: 16 } }>
-					<Button variant="secondary" onClick={ add }>
-						{ __( '+ Add spacing size', 'multisite-override-style' ) }
-					</Button>
-				</div>
 			</PanelBody>
 		</Panel>
 	);

@@ -1,6 +1,5 @@
 import { useState } from '@wordpress/element';
 import {
-	Button,
 	TextControl,
 	ColorPicker,
 	Dropdown,
@@ -26,7 +25,7 @@ function toSlug( name ) {
 		.replace( /^-|-$/g, '' );
 }
 
-function ColorRow( { color, onChange, onRemove, isLocked } ) {
+function ColorRow( { color, onChange, isLocked } ) {
 	const [ slugEdited, setSlugEdited ] = useState( !! color.slug );
 
 	const handleNameChange = ( name ) => {
@@ -100,17 +99,6 @@ function ColorRow( { color, onChange, onRemove, isLocked } ) {
 							/>
 						</HStack>
 					</FlexBlock>
-
-					<FlexItem>
-						<Button
-							icon="trash"
-							isDestructive
-							variant="tertiary"
-							onClick={ onRemove }
-							label={ __( 'Remove', 'multisite-override-style' ) }
-							size="compact"
-						/>
-					</FlexItem>
 				</Flex>
 			</CardBody>
 		</Card>
@@ -118,18 +106,10 @@ function ColorRow( { color, onChange, onRemove, isLocked } ) {
 }
 
 export default function ColorPaletteField( { colors, onChange, lockedSlugs = new Set() } ) {
-	const addColor = () => {
-		onChange( [ ...colors, { name: '', slug: '', color: '#000000' } ] );
-	};
-
 	const updateColor = ( index, updated ) => {
 		const next = [ ...colors ];
 		next[ index ] = updated;
 		onChange( next );
-	};
-
-	const removeColor = ( index ) => {
-		onChange( colors.filter( ( _, i ) => i !== index ) );
 	};
 
 	return (
@@ -152,17 +132,10 @@ export default function ColorPaletteField( { colors, onChange, lockedSlugs = new
 							key={ index }
 							color={ color }
 							onChange={ ( updated ) => updateColor( index, updated ) }
-							onRemove={ () => removeColor( index ) }
 							isLocked={ lockedSlugs.has( color.slug ) }
 						/>
 					) ) }
 				</VStack>
-
-				<div style={ { marginTop: 16 } }>
-					<Button variant="secondary" onClick={ addColor }>
-						{ __( '+ Add color', 'multisite-override-style' ) }
-					</Button>
-				</div>
 			</PanelBody>
 		</Panel>
 	);

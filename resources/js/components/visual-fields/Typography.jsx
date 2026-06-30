@@ -1,6 +1,5 @@
 import { useState } from '@wordpress/element';
 import {
-	Button,
 	TextControl,
 	Panel,
 	PanelBody,
@@ -44,12 +43,6 @@ export default function Typography( { fontFamilies, fontSizes, onChange, lockedF
 	const updateFontSizes = ( updated ) =>
 		onChange( { fontFamilies, fontSizes: updated } );
 
-	const addFontFamily = () =>
-		updateFontFamilies( [
-			...fontFamilies,
-			{ name: '', slug: '', fontFamily: '' },
-		] );
-
 	const updateFamilyName = ( index, name ) => {
 		const next = [ ...fontFamilies ];
 		const isLocked = lockedFamilySlugs.has( next[ index ].slug );
@@ -76,12 +69,6 @@ export default function Typography( { fontFamilies, fontSizes, onChange, lockedF
 		updateFontFamilies( next );
 	};
 
-	const removeFamily = ( index ) =>
-		updateFontFamilies( fontFamilies.filter( ( _, i ) => i !== index ) );
-
-	const addFontSize = () =>
-		updateFontSizes( [ ...fontSizes, { name: '', slug: '', size: '16px' } ] );
-
 	const updateSizeName = ( index, name ) => {
 		const next = [ ...fontSizes ];
 		const isLocked = lockedSizeSlugs.has( next[ index ].slug );
@@ -107,9 +94,6 @@ export default function Typography( { fontFamilies, fontSizes, onChange, lockedF
 		next[ index ] = { ...next[ index ], [ field ]: val };
 		updateFontSizes( next );
 	};
-
-	const removeSize = ( index ) =>
-		updateFontSizes( fontSizes.filter( ( _, i ) => i !== index ) );
 
 	return (
 		<>
@@ -161,28 +145,12 @@ export default function Typography( { fontFamilies, fontSizes, onChange, lockedF
 													/>
 												</VStack>
 											</FlexBlock>
-											<FlexItem>
-												<Button
-													icon="trash"
-													isDestructive
-													variant="tertiary"
-													onClick={ () => removeFamily( i ) }
-													label={ __( 'Remove', 'multisite-override-style' ) }
-													size="compact"
-													style={ { marginTop: 24 } }
-												/>
-											</FlexItem>
-										</Flex>
-									</CardBody>
-								</Card>
-							);
+									</Flex>
+								</CardBody>
+							</Card>
+						);
 						} ) }
 					</VStack>
-					<div style={ { marginTop: 16 } }>
-						<Button variant="secondary" onClick={ addFontFamily }>
-							{ __( '+ Add font family', 'multisite-override-style' ) }
-						</Button>
-					</div>
 				</PanelBody>
 			</Panel>
 
@@ -253,27 +221,12 @@ export default function Typography( { fontFamilies, fontSizes, onChange, lockedF
 													/>
 												</HStack>
 											</FlexBlock>
-											<FlexItem>
-												<Button
-													icon="trash"
-													isDestructive
-													variant="tertiary"
-													onClick={ () => removeSize( i ) }
-													label={ __( 'Remove', 'multisite-override-style' ) }
-													size="compact"
-												/>
-											</FlexItem>
 										</Flex>
 									</CardBody>
 								</Card>
 							);
 						} ) }
 					</VStack>
-					<div style={ { marginTop: 16 } }>
-						<Button variant="secondary" onClick={ addFontSize }>
-							{ __( '+ Add font size', 'multisite-override-style' ) }
-						</Button>
-					</div>
 				</PanelBody>
 			</Panel>
 		</>
