@@ -58,38 +58,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated installation guide with GitHub release instructions.
 
-## [0.2.0] - 2026-06-30
-
-### Changed
-
-- Move admin menu from Settings to Themes in Network Admin
-
-### Fixed
-
-- Fix REST controller registration to work outside admin context
-
-## [1.0.0] - 2026-06-30
-
-### Added
-
-- Network-wide CSS override with CodeMirror editor
-- Network-wide `theme.json` override with visual fields (color palette, typography, spacing, border) and raw JSON editor
-- Deep-merge into the user (Global Styles) layer via `wp_theme_json_data_user` hook
-- CSS appended after all theme stylesheets (priority 9999)
-- Per-site exemption management (network admin only)
-- Exemption toggle on Network Admin → Sites → Edit Site screen
-- Last 10 revisions with one-click restore
-- "Preview on site" with transient-backed draft state
+[Unreleased]: https://github.com/soderlind/multisite-override-style/compare/0.4.2...HEAD
+[0.4.2]: https://github.com/soderlind/multisite-override-style/compare/0.4.1...0.4.2
+[0.4.1]: https://github.com/soderlind/multisite-override-style/compare/0.4.0...0.4.1
+[0.4.0]: https://github.com/soderlind/multisite-override-style/compare/0.3.2...0.4.0
+[0.3.2]: https://github.com/soderlind/multisite-override-style/compare/0.3.1...0.3.2
+[0.3.1]: https://github.com/soderlind/multisite-override-style/compare/0.3.0...0.3.1
+[0.3.0]: https://github.com/soderlind/multisite-override-style/releases/tag/0.3.0
 - JSON export/import for dev → staging → production promotion
 - Full `uninstall.php` cleanup of all `wp_sitemeta` keys
 - Unit tests with PHPUnit 11 and Brain Monkey
 - React admin UI built with `@wordpress/scripts` and `@wordpress/components`
 
-### Security
-
-- All endpoints require `manage_network` capability
-- Nonce verification on Edit Site screen form
-- Preview token validated against transient and requires `manage_network`
-
-[Unreleased]: https://github.com/example/multisite-override-style/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/example/multisite-override-style/releases/tag/v1.0.0
