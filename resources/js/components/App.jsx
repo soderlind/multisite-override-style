@@ -20,6 +20,7 @@ export default function App() {
 	const [ saving, setSaving ] = useState( false );
 	const [ saved, setSaved ] = useState( false );
 	const [ previewToken, setPreviewToken ] = useState( null );
+	const [ activeTab, setActiveTab ] = useState( 'css' );
 
 	const load = useCallback( async () => {
 		try {
@@ -139,7 +140,7 @@ export default function App() {
 				) }
 			</div>
 
-			<TabPanel tabs={ tabs }>
+			<TabPanel tabs={ tabs } onSelect={ setActiveTab }>
 				{ ( tab ) => (
 					<div className="mos-tab-content">
 						{ tab.name === 'css' && (
@@ -174,24 +175,26 @@ export default function App() {
 				) }
 			</TabPanel>
 
-			<div className="mos-app__footer">
-				<Button
-					variant="primary"
-					onClick={ handleSave }
-					isBusy={ saving }
-					disabled={ saving }
-				>
-					{ __( 'Save', 'multisite-override-style' ) }
-				</Button>
+			{ ( activeTab === 'css' || activeTab === 'theme-json' ) && (
+				<div className="mos-app__footer">
+					<Button
+						variant="primary"
+						onClick={ handleSave }
+						isBusy={ saving }
+						disabled={ saving }
+					>
+						{ __( 'Save', 'multisite-override-style' ) }
+					</Button>
 
-				<Button
-					variant="secondary"
-					onClick={ handlePreview }
-					disabled={ saving }
-				>
-					{ __( 'Preview on site', 'multisite-override-style' ) }
-				</Button>
-			</div>
+					<Button
+						variant="secondary"
+						onClick={ handlePreview }
+						disabled={ saving }
+					>
+						{ __( 'Preview on site', 'multisite-override-style' ) }
+					</Button>
+				</div>
+			) }
 		</div>
 	);
 }
