@@ -102,6 +102,38 @@ check_prerequisites() {
         echo "Run: wp plugin activate $PLUGIN_SLUG --network"
         exit 1
     fi
+
+    # Verify plugin classes load without fatal errors
+    local class_check
+    class_check=$(wp_cmd eval "
+        try {
+            // Test core classes load
+            \$classes = [
+                'MultisiteOverrideStyle\\\Storage\\\SettingsRepository',
+                'MultisiteOverrideStyle\\\Override\\\CssOverride',
+                'MultisiteOverrideStyle\\\Override\\\ThemeJsonOverride',
+                'MultisiteOverrideStyle\\\Admin\\\RestController',
+                'Soderlind\\\WordPress\\\GitHubUpdater',
+            ];
+            foreach (\$classes as \$class) {
+                if (!class_exists(\$class)) {
+                    echo 'MISSING:' . \$class;
+                    exit(1);
+                }
+            }
+            echo 'ALL_OK';
+        } catch (Throwable \$e) {
+            echo 'ERROR:' . \$e->getMessage();
+            exit(1);
+        }
+    " 2>&1 || echo "EVAL_FAILED")
+
+    if [[ "$class_check" == *"ALL_OK"* ]]; then
+        pass "All plugin classes load correctly"
+    else
+        fail "Plugin class loading failed: $class_check"
+        exit 1
+    fi
 }
 
 # Test 1: REST API endpoints exist
