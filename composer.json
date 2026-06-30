@@ -1,16 +1,16 @@
 {
-	"name": "soderlind/multisite-override-style",
+	"name": "soderlind/network-style-override",
 	"description": "Network-wide CSS and theme.json overrides for WordPress Multisite",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
 	"autoload": {
 		"psr-4": {
-			"MultisiteOverrideStyle\\": "src/"
+			"NetworkStyleOverride\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"MultisiteOverrideStyle\\Tests\\": "tests/"
+			"NetworkStyleOverride\\Tests\\": "tests/"
 		}
 	},
 	"require": {

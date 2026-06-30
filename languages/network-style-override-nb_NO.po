@@ -14,7 +14,7 @@ msgstr ""
 "POT-Creation-Date: 2026-06-30T00:00:00+00:00\n"
 "PO-Revision-Date: 2026-06-30 00:00+0000\n"
 "X-Generator: WP-CLI\n"
-"X-Domain: multisite-override-style\n"
+"X-Domain: network-style-override\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/Admin/NetworkAdminPage.php:36

@@ -2,23 +2,23 @@
 
 declare( strict_types=1 );
 
-namespace MultisiteOverrideStyle\Storage;
+namespace NetworkStyleOverride\Storage;
 
 /**
  * Reads and writes the plugin's network-level settings in wp_sitemeta.
  *
  * Option keys:
- *   mos_network_css        — raw CSS string (global)
- *   mos_network_theme_json — JSON-encoded theme.json fragment (global)
- *   mos_exemptions         — JSON-encoded array of blog IDs (int[])
- *   mos_theme_overrides    — JSON-encoded per-theme overrides
+ *   nso_network_css        — raw CSS string (global)
+ *   nso_network_theme_json — JSON-encoded theme.json fragment (global)
+ *   nso_exemptions         — JSON-encoded array of blog IDs (int[])
+ *   nso_theme_overrides    — JSON-encoded per-theme overrides
  */
 final class SettingsRepository {
 
-	public const KEY_CSS             = 'mos_network_css';
-	public const KEY_THEME_JSON      = 'mos_network_theme_json';
-	public const KEY_EXEMPTIONS      = 'mos_exemptions';
-	public const KEY_THEME_OVERRIDES = 'mos_theme_overrides';
+	public const KEY_CSS             = 'nso_network_css';
+	public const KEY_THEME_JSON      = 'nso_network_theme_json';
+	public const KEY_EXEMPTIONS      = 'nso_exemptions';
+	public const KEY_THEME_OVERRIDES = 'nso_theme_overrides';
 
 	public function get_css(): string {
 		return (string) get_site_option( self::KEY_CSS, '' );

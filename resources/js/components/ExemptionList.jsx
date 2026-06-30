@@ -21,7 +21,7 @@ export default function ExemptionList() {
 		} catch ( e ) {
 			setError(
 				e.message ??
-					__( 'Failed to load sites.', 'multisite-override-style' )
+					__( 'Failed to load sites.', 'network-style-override' )
 			);
 		}
 	}, [] );
@@ -45,7 +45,7 @@ export default function ExemptionList() {
 				e.message ??
 					__(
 						'Failed to update exemption.',
-						'multisite-override-style'
+						'network-style-override'
 					)
 			);
 		} finally {
@@ -70,7 +70,7 @@ export default function ExemptionList() {
 			<p className="description">
 				{ __(
 					'Exempted sites will not receive any network CSS or theme.json overrides.',
-					'multisite-override-style'
+					'network-style-override'
 				) }
 			</p>
 
@@ -89,7 +89,7 @@ export default function ExemptionList() {
 						onChange={ setSearch }
 						placeholder={ __(
 							'Search sites…',
-							'multisite-override-style'
+							'network-style-override'
 						) }
 					/>
 
@@ -97,15 +97,15 @@ export default function ExemptionList() {
 						<thead>
 							<tr>
 								<th>
-									{ __( 'Site', 'multisite-override-style' ) }
+									{ __( 'Site', 'network-style-override' ) }
 								</th>
 								<th>
-									{ __( 'URL', 'multisite-override-style' ) }
+									{ __( 'URL', 'network-style-override' ) }
 								</th>
 								<th>
 									{ __(
 										'Exempt from overrides',
-										'multisite-override-style'
+										'network-style-override'
 									) }
 								</th>
 							</tr>
@@ -141,7 +141,7 @@ export default function ExemptionList() {
 									<td colSpan={ 3 }>
 										{ __(
 											'No sites found.',
-											'multisite-override-style'
+											'network-style-override'
 										) }
 									</td>
 								</tr>

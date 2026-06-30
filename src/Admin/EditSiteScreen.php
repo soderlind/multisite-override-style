@@ -2,9 +2,9 @@
 
 declare( strict_types=1 );
 
-namespace MultisiteOverrideStyle\Admin;
+namespace NetworkStyleOverride\Admin;
 
-use MultisiteOverrideStyle\Storage\SettingsRepository;
+use NetworkStyleOverride\Storage\SettingsRepository;
 
 /**
  * Adds a "Override Style" checkbox to Network Admin → Sites → Edit Site.
@@ -13,8 +13,8 @@ use MultisiteOverrideStyle\Storage\SettingsRepository;
 final class EditSiteScreen {
 
 	public const CAPABILITY = 'manage_network';
-	public const NONCE_ACTION = 'mos_edit_site_exemption';
-	public const FIELD_NAME = 'mos_exempted';
+	public const NONCE_ACTION = 'nso_edit_site_exemption';
+	public const FIELD_NAME = 'nso_exempted';
 
 	public function __construct(
 		private readonly SettingsRepository $settings,
@@ -37,12 +37,12 @@ final class EditSiteScreen {
 		}
 
 		$is_exempted = $this->settings->is_exempted( $blog_id );
-		wp_nonce_field( self::NONCE_ACTION . '_' . $blog_id, '_mos_nonce' );
+		wp_nonce_field( self::NONCE_ACTION . '_' . $blog_id, '_nso_nonce' );
 
 		?>
 		<tr>
 			<th scope="row">
-				<?php esc_html_e( 'Override Style', 'multisite-override-style' ); ?>
+				<?php esc_html_e( 'Override Style', 'network-style-override' ); ?>
 			</th>
 			<td>
 				<label>
@@ -52,7 +52,7 @@ final class EditSiteScreen {
 						value="1"
 						<?php checked( $is_exempted ); ?>
 					/>
-					<?php esc_html_e( 'Exempt this site from the network CSS and theme.json overrides.', 'multisite-override-style' ); ?>
+					<?php esc_html_e( 'Exempt this site from the network CSS and theme.json overrides.', 'network-style-override' ); ?>
 				</label>
 			</td>
 		</tr>
@@ -64,7 +64,7 @@ final class EditSiteScreen {
 			return;
 		}
 
-		$nonce = isset( $_POST['_mos_nonce'] ) ? sanitize_key( $_POST['_mos_nonce'] ) : '';
+		$nonce = isset( $_POST['_nso_nonce'] ) ? sanitize_key( $_POST['_nso_nonce'] ) : '';
 		if ( ! wp_verify_nonce( $nonce, self::NONCE_ACTION . '_' . $blog_id ) ) {
 			return;
 		}

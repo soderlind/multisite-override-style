@@ -14,7 +14,7 @@ jobs:
     name: Build release zip
     runs-on: ubuntu-latest
     env:
-      PLUGIN_ZIP: multisite-override-style.zip
+      PLUGIN_ZIP: network-style-override.zip
     permissions:
       contents: write
     steps:

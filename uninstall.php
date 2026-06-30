@@ -13,8 +13,8 @@ if ( ! is_multisite() ) {
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use MultisiteOverrideStyle\Storage\RevisionRepository;
-use MultisiteOverrideStyle\Storage\SettingsRepository;
+use NetworkStyleOverride\Storage\RevisionRepository;
+use NetworkStyleOverride\Storage\SettingsRepository;
 
 ( new SettingsRepository() )->delete_all();
 ( new RevisionRepository( new SettingsRepository() ) )->delete_all();

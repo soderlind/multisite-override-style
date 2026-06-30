@@ -24,7 +24,7 @@ export default function RevisionHistory( { onRestored } ) {
 				e.message ??
 					__(
 						'Failed to load revisions.',
-						'multisite-override-style'
+						'network-style-override'
 					)
 			);
 		}
@@ -39,7 +39,7 @@ export default function RevisionHistory( { onRestored } ) {
 			! window.confirm(
 				__(
 					'Restore this revision? The current settings will be saved as a new revision first.',
-					'multisite-override-style'
+					'network-style-override'
 				)
 			)
 		) {
@@ -53,7 +53,7 @@ export default function RevisionHistory( { onRestored } ) {
 			await load();
 		} catch ( e ) {
 			setError(
-				e.message ?? __( 'Restore failed.', 'multisite-override-style' )
+				e.message ?? __( 'Restore failed.', 'network-style-override' )
 			);
 		} finally {
 			setRestoring( null );
@@ -65,7 +65,7 @@ export default function RevisionHistory( { onRestored } ) {
 			<p className="description">
 				{ __(
 					'The last 10 saves are kept. Restoring a revision saves the current settings as a new revision first.',
-					'multisite-override-style'
+					'network-style-override'
 				) }
 			</p>
 
@@ -81,7 +81,7 @@ export default function RevisionHistory( { onRestored } ) {
 				<p>
 					{ __(
 						'No revisions yet. Save your settings to create the first revision.',
-						'multisite-override-style'
+						'network-style-override'
 					) }
 				</p>
 			) : (
@@ -89,10 +89,10 @@ export default function RevisionHistory( { onRestored } ) {
 					<thead>
 						<tr>
 							<th>
-								{ __( 'Saved', 'multisite-override-style' ) }
+								{ __( 'Saved', 'network-style-override' ) }
 							</th>
 							<th>
-								{ __( 'Author', 'multisite-override-style' ) }
+								{ __( 'Author', 'network-style-override' ) }
 							</th>
 							<th></th>
 						</tr>
@@ -106,7 +106,7 @@ export default function RevisionHistory( { onRestored } ) {
 										<span className="mos-badge">
 											{ __(
 												'current',
-												'multisite-override-style'
+												'network-style-override'
 											) }
 										</span>
 									) }
@@ -124,7 +124,7 @@ export default function RevisionHistory( { onRestored } ) {
 										>
 											{ __(
 												'Restore',
-												'multisite-override-style'
+												'network-style-override'
 											) }
 										</Button>
 									) }

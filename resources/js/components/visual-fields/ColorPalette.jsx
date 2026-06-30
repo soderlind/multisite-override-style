@@ -82,7 +82,7 @@ function ColorRow( { color, onChange, isLocked } ) {
 					<FlexBlock>
 						<HStack alignment="stretch" spacing={ 3 }>
 							<TextControl
-								placeholder={ __( 'Primary', 'multisite-override-style' ) }
+								placeholder={ __( 'Primary', 'network-style-override' ) }
 								value={ color.name }
 								onChange={ handleNameChange }
 								__nextHasNoMarginBottom
@@ -90,7 +90,7 @@ function ColorRow( { color, onChange, isLocked } ) {
 								disabled={ isLocked }
 							/>
 							<TextControl
-								placeholder={ __( 'primary', 'multisite-override-style' ) }
+								placeholder={ __( 'primary', 'network-style-override' ) }
 								value={ color.slug }
 								onChange={ handleSlugChange }
 								__nextHasNoMarginBottom
@@ -115,15 +115,15 @@ export default function ColorPaletteField( { colors, onChange, lockedSlugs = new
 	return (
 		<Panel>
 			<PanelBody
-				title={ __( 'Color Palette', 'multisite-override-style' ) }
+				title={ __( 'Color Palette', 'network-style-override' ) }
 				initialOpen={ true }
 			>
 				<p className="description">
-					{ __( 'Override colors available in the block editor.', 'multisite-override-style' ) }
+					{ __( 'Override colors available in the block editor.', 'network-style-override' ) }
 				</p>
 				<div style={ { display: 'flex', padding: '0 56px 8px 56px', fontSize: 11, fontWeight: 500, color: '#757575', textTransform: 'uppercase' } }>
-					<span style={ { flex: 1 } }>{ __( 'Name', 'multisite-override-style' ) }</span>
-					<span style={ { flex: 1 } }>{ __( 'Identifier', 'multisite-override-style' ) }</span>
+					<span style={ { flex: 1 } }>{ __( 'Name', 'network-style-override' ) }</span>
+					<span style={ { flex: 1 } }>{ __( 'Identifier', 'network-style-override' ) }</span>
 				</div>
 
 				<VStack spacing={ 3 }>

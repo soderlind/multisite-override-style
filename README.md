@@ -1,4 +1,4 @@
-# Multisite Override Style
+# Network Style Override
 
 Network-wide CSS and `theme.json` overrides for WordPress Multisite. Enforce brand consistency across all subsites from a single admin panel.
 
@@ -28,7 +28,7 @@ Network-wide CSS and `theme.json` overrides for WordPress Multisite. Enforce bra
 
 ### From GitHub Release (recommended)
 
-1. Download the latest `multisite-override-style.zip` from [Releases](https://github.com/soderlind/multisite-override-style/releases)
+1. Download the latest `network-style-override.zip` from [Releases](https://github.com/soderlind/network-style-override/releases)
 2. Upload via **Network Admin → Plugins → Add New → Upload Plugin**
 3. **Network Activate** from Network Admin → Plugins
 
@@ -38,8 +38,8 @@ The plugin includes automatic updates — you'll see new versions in WordPress l
 
 ```bash
 cd wp-content/plugins
-git clone https://github.com/soderlind/multisite-override-style.git
-cd multisite-override-style
+git clone https://github.com/soderlind/network-style-override.git
+cd network-style-override
 composer install
 npm install && npm run build
 ```
@@ -77,7 +77,7 @@ npm run lint:js
 ### Project Structure
 
 ```text
-├── multisite-override-style.php   # Plugin bootstrap
+├── network-style-override.php   # Plugin bootstrap
 ├── src/
 │   ├── Plugin.php                 # Hook wiring
 │   ├── Admin/                     # Network admin page, REST API, Edit Site screen

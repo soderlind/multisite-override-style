@@ -2,9 +2,9 @@
 
 declare( strict_types=1 );
 
-namespace MultisiteOverrideStyle\Override;
+namespace NetworkStyleOverride\Override;
 
-use MultisiteOverrideStyle\Service\EffectiveOverrideResolver;
+use NetworkStyleOverride\Service\EffectiveOverrideResolver;
 
 /**
  * Enqueues the network CSS override as an inline <style> block on the front-end,
@@ -29,7 +29,7 @@ final class CssOverride {
 		}
 
 		printf(
-			"<style id=\"mos-override\">\n%s\n</style>\n",
+			"<style id=\"nso-override\">\n%s\n</style>\n",
 			$css // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS is admin-controlled.
 		);
 	}

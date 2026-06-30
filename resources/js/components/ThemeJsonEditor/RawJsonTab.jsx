@@ -25,7 +25,7 @@ export default function RawJsonTab( { value, onChange } ) {
 			setJsonError(
 				__(
 					'Invalid JSON — changes will not be saved until fixed.',
-					'multisite-override-style'
+					'network-style-override'
 				)
 			);
 		}

@@ -18,14 +18,14 @@ export default function ImportExport( { onImported } ) {
 			const url = URL.createObjectURL( blob );
 			const a = document.createElement( 'a' );
 			a.href = url;
-			a.download = `mos-settings-${ new Date()
+			a.download = `nso-settings-${ new Date()
 				.toISOString()
 				.slice( 0, 10 ) }.json`;
 			a.click();
 			URL.revokeObjectURL( url );
 		} catch ( e ) {
 			setError(
-				e.message ?? __( 'Export failed.', 'multisite-override-style' )
+				e.message ?? __( 'Export failed.', 'network-style-override' )
 			);
 		}
 	};
@@ -40,7 +40,7 @@ export default function ImportExport( { onImported } ) {
 			! window.confirm(
 				__(
 					'This will overwrite all current settings (CSS, theme.json, exemptions). The current settings will be saved as a revision first. Continue?',
-					'multisite-override-style'
+					'network-style-override'
 				)
 			)
 		) {
@@ -60,7 +60,7 @@ export default function ImportExport( { onImported } ) {
 				throw new Error(
 					__(
 						'Invalid bundle: missing css or theme_json fields.',
-						'multisite-override-style'
+						'network-style-override'
 					)
 				);
 			}
@@ -75,7 +75,7 @@ export default function ImportExport( { onImported } ) {
 			setSuccess(
 				__(
 					'Settings imported successfully.',
-					'multisite-override-style'
+					'network-style-override'
 				)
 			);
 		} catch ( e ) {
@@ -83,7 +83,7 @@ export default function ImportExport( { onImported } ) {
 				e.message ??
 					__(
 						'Import failed. Make sure the file is a valid MOS export.',
-						'multisite-override-style'
+						'network-style-override'
 					)
 			);
 		} finally {
@@ -106,24 +106,24 @@ export default function ImportExport( { onImported } ) {
 			) }
 
 			<div className="mos-import-export__section">
-				<h3>{ __( 'Export', 'multisite-override-style' ) }</h3>
+				<h3>{ __( 'Export', 'network-style-override' ) }</h3>
 				<p>
 					{ __(
 						'Download all current settings (CSS, theme.json, exemptions) as a JSON file.',
-						'multisite-override-style'
+						'network-style-override'
 					) }
 				</p>
 				<Button variant="secondary" onClick={ handleExport }>
-					{ __( 'Export settings', 'multisite-override-style' ) }
+					{ __( 'Export settings', 'network-style-override' ) }
 				</Button>
 			</div>
 
 			<div className="mos-import-export__section">
-				<h3>{ __( 'Import', 'multisite-override-style' ) }</h3>
+				<h3>{ __( 'Import', 'network-style-override' ) }</h3>
 				<p>
 					{ __(
 						'Import settings from a previously exported JSON file. Current settings will be preserved as a revision.',
-						'multisite-override-style'
+						'network-style-override'
 					) }
 				</p>
 
@@ -135,7 +135,7 @@ export default function ImportExport( { onImported } ) {
 					style={ { display: 'none' } }
 					aria-label={ __(
 						'Select JSON file to import',
-						'multisite-override-style'
+						'network-style-override'
 					) }
 				/>
 
@@ -145,7 +145,7 @@ export default function ImportExport( { onImported } ) {
 					isBusy={ importing }
 					disabled={ importing }
 				>
-					{ __( 'Import settings…', 'multisite-override-style' ) }
+					{ __( 'Import settings…', 'network-style-override' ) }
 				</Button>
 			</div>
 		</div>

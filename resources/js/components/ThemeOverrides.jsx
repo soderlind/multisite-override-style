@@ -109,7 +109,7 @@ export default function ThemeOverrides( {
 		const original = originalThemeJson[ selectedTheme ] ?? {};
 		const confirmMsg = __(
 			'Reset to theme defaults? This will replace your current theme.json override with the original from the theme.',
-			'multisite-override-style'
+			'network-style-override'
 		);
 		if ( ! window.confirm( confirmMsg ) ) {
 			return;
@@ -128,7 +128,7 @@ export default function ThemeOverrides( {
 
 		const confirmMsg = __(
 			'Delete all overrides for this theme?',
-			'multisite-override-style'
+			'network-style-override'
 		);
 		if ( ! window.confirm( confirmMsg ) ) {
 			return;
@@ -150,7 +150,7 @@ export default function ThemeOverrides( {
 			<Notice status="info" isDismissible={ false }>
 				{ __(
 					'No themes found in the network.',
-					'multisite-override-style'
+					'network-style-override'
 				) }
 			</Notice>
 		);
@@ -173,10 +173,10 @@ export default function ThemeOverrides( {
 		Object.keys( originalThemeJson[ selectedTheme ] ).length > 0;
 
 	const tabs = [
-		{ name: 'css', title: __( 'CSS', 'multisite-override-style' ) },
+		{ name: 'css', title: __( 'CSS', 'network-style-override' ) },
 		{
 			name: 'theme-json',
-			title: __( 'theme.json', 'multisite-override-style' ),
+			title: __( 'theme.json', 'network-style-override' ),
 			disabled: ! isBlockTheme,
 		},
 	];
@@ -186,12 +186,12 @@ export default function ThemeOverrides( {
 			<p className="description">
 				{ __(
 					'Add CSS or theme.json overrides that apply only to specific themes. These are applied after the global overrides.',
-					'multisite-override-style'
+					'network-style-override'
 				) }
 			</p>
 
 			<SelectControl
-				label={ __( 'Select Theme', 'multisite-override-style' ) }
+				label={ __( 'Select Theme', 'network-style-override' ) }
 				value={ selectedTheme }
 				options={ themeOptions }
 				onChange={ handleThemeChange }
@@ -214,7 +214,7 @@ export default function ThemeOverrides( {
 							<span>
 								{ __(
 									'Loading theme.json…',
-									'multisite-override-style'
+									'network-style-override'
 								) }
 							</span>
 						</div>
@@ -261,7 +261,7 @@ export default function ThemeOverrides( {
 							>
 								{ __(
 									'Reset to theme defaults',
-									'multisite-override-style'
+									'network-style-override'
 								) }
 							</Button>
 						) }
@@ -276,7 +276,7 @@ export default function ThemeOverrides( {
 							>
 								{ __(
 									'Delete Override',
-									'multisite-override-style'
+									'network-style-override'
 								) }
 							</Button>
 						) }

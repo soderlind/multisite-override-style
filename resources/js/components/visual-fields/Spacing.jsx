@@ -64,16 +64,16 @@ export default function Spacing( { spacingSizes, onChange, lockedSlugs = new Set
 	return (
 		<Panel>
 			<PanelBody
-				title={ __( 'Spacing Scale', 'multisite-override-style' ) }
+				title={ __( 'Spacing Scale', 'network-style-override' ) }
 				initialOpen={ false }
 			>
 				<p className="description">
-					{ __( 'Override spacing presets for padding, margin, and gap.', 'multisite-override-style' ) }
+					{ __( 'Override spacing presets for padding, margin, and gap.', 'network-style-override' ) }
 				</p>
 				<div style={ { display: 'flex', padding: '0 56px 8px 56px', fontSize: 11, fontWeight: 500, color: '#757575', textTransform: 'uppercase' } }>
-					<span style={ { flex: 1 } }>{ __( 'Name', 'multisite-override-style' ) }</span>
-					<span style={ { flex: 1 } }>{ __( 'Identifier', 'multisite-override-style' ) }</span>
-					<span style={ { flex: 1 } }>{ __( 'Size', 'multisite-override-style' ) }</span>
+					<span style={ { flex: 1 } }>{ __( 'Name', 'network-style-override' ) }</span>
+					<span style={ { flex: 1 } }>{ __( 'Identifier', 'network-style-override' ) }</span>
+					<span style={ { flex: 1 } }>{ __( 'Size', 'network-style-override' ) }</span>
 				</div>
 
 				<VStack spacing={ 3 }>
@@ -108,7 +108,7 @@ export default function Spacing( { spacingSizes, onChange, lockedSlugs = new Set
 										<FlexBlock>
 											<HStack alignment="stretch" spacing={ 3 }>
 												<TextControl
-													placeholder={ __( 'Medium', 'multisite-override-style' ) }
+													placeholder={ __( 'Medium', 'network-style-override' ) }
 													value={ item.name }
 													onChange={ ( v ) => updateName( i, v ) }
 													__nextHasNoMarginBottom
@@ -116,7 +116,7 @@ export default function Spacing( { spacingSizes, onChange, lockedSlugs = new Set
 													disabled={ isLocked }
 												/>
 												<TextControl
-													placeholder={ __( 'medium', 'multisite-override-style' ) }
+													placeholder={ __( 'medium', 'network-style-override' ) }
 													value={ item.slug }
 													onChange={ ( v ) => updateSlug( i, v ) }
 													__nextHasNoMarginBottom

@@ -2,13 +2,13 @@
 
 declare( strict_types=1 );
 
-namespace MultisiteOverrideStyle\Admin;
+namespace NetworkStyleOverride\Admin;
 
-use MultisiteOverrideStyle\Preview\PreviewHandler;
-use MultisiteOverrideStyle\Service\OverrideBundleService;
-use MultisiteOverrideStyle\Service\ThemeCatalogService;
-use MultisiteOverrideStyle\Storage\RevisionRepository;
-use MultisiteOverrideStyle\Storage\SettingsRepository;
+use NetworkStyleOverride\Preview\PreviewHandler;
+use NetworkStyleOverride\Service\OverrideBundleService;
+use NetworkStyleOverride\Service\ThemeCatalogService;
+use NetworkStyleOverride\Storage\RevisionRepository;
+use NetworkStyleOverride\Storage\SettingsRepository;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
@@ -19,20 +19,20 @@ use WP_REST_Server;
  * All endpoints require the manage_network capability.
  *
  * Routes:
- *   GET    /mos/v1/settings                     — current CSS, theme.json, exemptions
- *   POST   /mos/v1/settings                     — save settings (creates a revision first)
- *   GET    /mos/v1/revisions                    — list last 10 revisions
- *   POST   /mos/v1/revisions/{id}/restore       — restore a revision
- *   GET    /mos/v1/sites                        — all sites with exemption status
- *   POST   /mos/v1/sites/{id}/exemption         — set exemption for a site
- *   POST   /mos/v1/preview                      — create a draft, returns preview URL
- *   DELETE /mos/v1/preview/{token}              — discard a draft
- *   GET    /mos/v1/export                       — download the settings bundle
- *   POST   /mos/v1/import                       — import a settings bundle
+ *   GET    /nso/v1/settings                     — current CSS, theme.json, exemptions
+ *   POST   /nso/v1/settings                     — save settings (creates a revision first)
+ *   GET    /nso/v1/revisions                    — list last 10 revisions
+ *   POST   /nso/v1/revisions/{id}/restore       — restore a revision
+ *   GET    /nso/v1/sites                        — all sites with exemption status
+ *   POST   /nso/v1/sites/{id}/exemption         — set exemption for a site
+ *   POST   /nso/v1/preview                      — create a draft, returns preview URL
+ *   DELETE /nso/v1/preview/{token}              — discard a draft
+ *   GET    /nso/v1/export                       — download the settings bundle
+ *   POST   /nso/v1/import                       — import a settings bundle
  */
 final class RestController {
 
-	private const NAMESPACE = 'mos/v1';
+	private const NAMESPACE = 'nso/v1';
 	private const CAPABILITY = 'manage_network';
 
 	public function __construct(
@@ -216,7 +216,7 @@ final class RestController {
 		$restored = $this->revisions->restore( $id, get_current_user_id() );
 
 		if ( ! $restored ) {
-			return new WP_REST_Response( [ 'message' => __( 'Revision not found.', 'multisite-override-style' ) ], 404 );
+			return new WP_REST_Response( [ 'message' => __( 'Revision not found.', 'network-style-override' ) ], 404 );
 		}
 
 		return new WP_REST_Response( $this->bundle->loadGlobal() );
@@ -350,7 +350,7 @@ final class RestController {
 			// Theme might not exist or is not a block theme.
 			if ( ! $this->theme_catalog->themeExists( $slug ) ) {
 				return new WP_REST_Response(
-					[ 'message' => __( 'Theme not found.', 'multisite-override-style' ) ],
+					[ 'message' => __( 'Theme not found.', 'network-style-override' ) ],
 					404
 				);
 			}

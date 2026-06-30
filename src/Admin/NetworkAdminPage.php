@@ -2,11 +2,11 @@
 
 declare( strict_types=1 );
 
-namespace MultisiteOverrideStyle\Admin;
+namespace NetworkStyleOverride\Admin;
 
-use MultisiteOverrideStyle\Preview\PreviewHandler;
-use MultisiteOverrideStyle\Storage\RevisionRepository;
-use MultisiteOverrideStyle\Storage\SettingsRepository;
+use NetworkStyleOverride\Preview\PreviewHandler;
+use NetworkStyleOverride\Storage\RevisionRepository;
+use NetworkStyleOverride\Storage\SettingsRepository;
 
 /**
  * Registers the "Override Style" page under Network Admin → Settings.
@@ -14,7 +14,7 @@ use MultisiteOverrideStyle\Storage\SettingsRepository;
  */
 final class NetworkAdminPage {
 
-	public const MENU_SLUG = 'multisite-override-style';
+	public const MENU_SLUG = 'network-style-override';
 	public const CAPABILITY = 'manage_network';
 
 	public function __construct(
@@ -31,8 +31,8 @@ final class NetworkAdminPage {
 	public function add_menu(): void {
 		add_submenu_page(
 			'themes.php',
-			__( 'Override Style', 'multisite-override-style' ),
-			__( 'Override Style', 'multisite-override-style' ),
+			__( 'Override Style', 'network-style-override' ),
+			__( 'Override Style', 'network-style-override' ),
 			self::CAPABILITY,
 			self::MENU_SLUG,
 			[ $this, 'render_page' ],
@@ -41,10 +41,10 @@ final class NetworkAdminPage {
 
 	public function render_page(): void {
 		if ( ! current_user_can( self::CAPABILITY ) ) {
-			wp_die( esc_html__( 'You do not have permission to access this page.', 'multisite-override-style' ) );
+			wp_die( esc_html__( 'You do not have permission to access this page.', 'network-style-override' ) );
 		}
 
-		echo '<div class="wrap"><div id="mos-admin-app"></div></div>';
+		echo '<div class="wrap"><div id="nso-admin-app"></div></div>';
 	}
 
 	public function enqueue_assets( string $hook ): void {
@@ -62,7 +62,7 @@ final class NetworkAdminPage {
 			return;
 		}
 
-		$asset_file = MOS_PLUGIN_DIR . 'build/index.asset.php';
+		$asset_file = NSO_PLUGIN_DIR . 'build/index.asset.php';
 		if ( ! file_exists( $asset_file ) ) {
 			return;
 		}
@@ -70,19 +70,19 @@ final class NetworkAdminPage {
 		$asset = require $asset_file;
 
 		wp_enqueue_script(
-			'mos-admin',
-			MOS_PLUGIN_URL . 'build/index.js',
+			'nso-admin',
+			NSO_PLUGIN_URL . 'build/index.js',
 			$asset['dependencies'],
 			$asset['version'],
 			true,
 		);
 
 		// Only enqueue CSS if it exists.
-		$css_file = MOS_PLUGIN_DIR . 'build/index.css';
+		$css_file = NSO_PLUGIN_DIR . 'build/index.css';
 		if ( file_exists( $css_file ) ) {
 			wp_enqueue_style(
-				'mos-admin',
-				MOS_PLUGIN_URL . 'build/index.css',
+				'nso-admin',
+				NSO_PLUGIN_URL . 'build/index.css',
 				[ 'wp-components' ],
 				$asset['version'],
 			);
@@ -92,10 +92,10 @@ final class NetworkAdminPage {
 		}
 
 		wp_localize_script(
-			'mos-admin',
+			'nso-admin',
 			'mosAdminData',
 			[
-				'restUrl'   => esc_url_raw( rest_url( 'mos/v1' ) ),
+				'restUrl'   => esc_url_raw( rest_url( 'nso/v1' ) ),
 				'nonce'     => wp_create_nonce( 'wp_rest' ),
 				'siteUrl'   => network_home_url( '/' ),
 			],

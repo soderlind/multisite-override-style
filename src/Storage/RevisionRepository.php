@@ -2,7 +2,7 @@
 
 declare( strict_types=1 );
 
-namespace MultisiteOverrideStyle\Storage;
+namespace NetworkStyleOverride\Storage;
 
 /**
  * Manages the last 10 revisions of the Network Override.
@@ -17,11 +17,11 @@ namespace MultisiteOverrideStyle\Storage;
  *   exemptions: int[]
  * }
  *
- * Stored as a JSON array in wp_sitemeta under mos_revisions.
+ * Stored as a JSON array in wp_sitemeta under nso_revisions.
  */
 final class RevisionRepository {
 
-	public const KEY_REVISIONS = 'mos_revisions';
+	public const KEY_REVISIONS = 'nso_revisions';
 	public const MAX_REVISIONS = 10;
 
 	public function __construct(

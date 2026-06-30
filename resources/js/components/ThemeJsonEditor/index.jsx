@@ -5,8 +5,8 @@ import RawJsonTab from './RawJsonTab';
 
 export default function ThemeJsonEditor( { value, onChange, originalValue } ) {
 	const tabs = [
-		{ name: 'visual', title: __( 'Visual', 'multisite-override-style' ) },
-		{ name: 'raw', title: __( 'Raw JSON', 'multisite-override-style' ) },
+		{ name: 'visual', title: __( 'Visual', 'network-style-override' ) },
+		{ name: 'raw', title: __( 'Raw JSON', 'network-style-override' ) },
 	];
 
 	return (
@@ -14,7 +14,7 @@ export default function ThemeJsonEditor( { value, onChange, originalValue } ) {
 			<p className="description">
 				{ __(
 					'Values are deep-merged into the user (Global Styles) layer — network values take precedence. Applies to block themes only.',
-					'multisite-override-style'
+					'network-style-override'
 				) }
 			</p>
 

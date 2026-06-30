@@ -99,15 +99,15 @@ export default function Typography( { fontFamilies, fontSizes, onChange, lockedF
 		<>
 			<Panel>
 				<PanelBody
-					title={ __( 'Font Families', 'multisite-override-style' ) }
+					title={ __( 'Font Families', 'network-style-override' ) }
 					initialOpen={ false }
 				>
 					<p className="description">
-						{ __( 'Override font stacks available in the block editor.', 'multisite-override-style' ) }
+						{ __( 'Override font stacks available in the block editor.', 'network-style-override' ) }
 					</p>
 					<div style={ { display: 'flex', padding: '0 56px 8px 0', fontSize: 11, fontWeight: 500, color: '#757575', textTransform: 'uppercase' } }>
-						<span style={ { flex: 1 } }>{ __( 'Name', 'multisite-override-style' ) }</span>
-						<span style={ { flex: 1 } }>{ __( 'Identifier', 'multisite-override-style' ) }</span>
+						<span style={ { flex: 1 } }>{ __( 'Name', 'network-style-override' ) }</span>
+						<span style={ { flex: 1 } }>{ __( 'Identifier', 'network-style-override' ) }</span>
 					</div>
 					<VStack spacing={ 3 }>
 						{ fontFamilies.map( ( family, i ) => {
@@ -120,7 +120,7 @@ export default function Typography( { fontFamilies, fontSizes, onChange, lockedF
 												<VStack spacing={ 3 }>
 													<HStack alignment="stretch" spacing={ 3 }>
 														<TextControl
-															placeholder={ __( 'Heading', 'multisite-override-style' ) }
+															placeholder={ __( 'Heading', 'network-style-override' ) }
 															value={ family.name }
 															onChange={ ( v ) => updateFamilyName( i, v ) }
 															__nextHasNoMarginBottom
@@ -128,7 +128,7 @@ export default function Typography( { fontFamilies, fontSizes, onChange, lockedF
 															disabled={ isLocked }
 														/>
 														<TextControl
-															placeholder={ __( 'heading', 'multisite-override-style' ) }
+															placeholder={ __( 'heading', 'network-style-override' ) }
 															value={ family.slug }
 															onChange={ ( v ) => updateFamilySlug( i, v ) }
 															__nextHasNoMarginBottom
@@ -137,7 +137,7 @@ export default function Typography( { fontFamilies, fontSizes, onChange, lockedF
 														/>
 													</HStack>
 													<TextControl
-														label={ __( 'CSS Font Stack', 'multisite-override-style' ) }
+														label={ __( 'CSS Font Stack', 'network-style-override' ) }
 														value={ family.fontFamily }
 														onChange={ ( v ) => updateFamily( i, 'fontFamily', v ) }
 														placeholder="Georgia, 'Times New Roman', serif"
@@ -156,16 +156,16 @@ export default function Typography( { fontFamilies, fontSizes, onChange, lockedF
 
 			<Panel>
 				<PanelBody
-					title={ __( 'Font Sizes', 'multisite-override-style' ) }
+					title={ __( 'Font Sizes', 'network-style-override' ) }
 					initialOpen={ false }
 				>
 					<p className="description">
-						{ __( 'Override font size presets for the block editor.', 'multisite-override-style' ) }
+						{ __( 'Override font size presets for the block editor.', 'network-style-override' ) }
 					</p>
 					<div style={ { display: 'flex', padding: '0 56px 8px 56px', fontSize: 11, fontWeight: 500, color: '#757575', textTransform: 'uppercase' } }>
-						<span style={ { flex: 1 } }>{ __( 'Name', 'multisite-override-style' ) }</span>
-						<span style={ { flex: 1 } }>{ __( 'Identifier', 'multisite-override-style' ) }</span>
-						<span style={ { flex: 1 } }>{ __( 'Size', 'multisite-override-style' ) }</span>
+						<span style={ { flex: 1 } }>{ __( 'Name', 'network-style-override' ) }</span>
+						<span style={ { flex: 1 } }>{ __( 'Identifier', 'network-style-override' ) }</span>
+						<span style={ { flex: 1 } }>{ __( 'Size', 'network-style-override' ) }</span>
 					</div>
 					<VStack spacing={ 3 }>
 						{ fontSizes.map( ( size, i ) => {
@@ -198,7 +198,7 @@ export default function Typography( { fontFamilies, fontSizes, onChange, lockedF
 											<FlexBlock>
 												<HStack alignment="stretch" spacing={ 3 }>
 													<TextControl
-														placeholder={ __( 'Large', 'multisite-override-style' ) }
+														placeholder={ __( 'Large', 'network-style-override' ) }
 														value={ size.name }
 														onChange={ ( v ) => updateSizeName( i, v ) }
 														__nextHasNoMarginBottom
@@ -206,7 +206,7 @@ export default function Typography( { fontFamilies, fontSizes, onChange, lockedF
 														disabled={ isLocked }
 													/>
 													<TextControl
-														placeholder={ __( 'large', 'multisite-override-style' ) }
+														placeholder={ __( 'large', 'network-style-override' ) }
 														value={ size.slug }
 														onChange={ ( v ) => updateSizeSlug( i, v ) }
 														__nextHasNoMarginBottom

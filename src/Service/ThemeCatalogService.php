@@ -5,12 +5,12 @@
  * Provides a unified API for discovering network themes and fetching
  * original theme.json data from themes.
  *
- * @package MultisiteOverrideStyle
+ * @package NetworkStyleOverride
  */
 
 declare( strict_types=1 );
 
-namespace MultisiteOverrideStyle\Service;
+namespace NetworkStyleOverride\Service;
 
 /**
  * Theme discovery and metadata service.

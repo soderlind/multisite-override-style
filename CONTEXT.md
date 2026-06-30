@@ -1,4 +1,4 @@
-# Domain Model — Multisite Override Style
+# Domain Model — Network Style Override
 
 ## Glossary
 

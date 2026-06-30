@@ -20,11 +20,11 @@ const CSS_UNITS = [
 ];
 
 const BORDER_STYLES = [
-	{ value: '', label: __( 'None', 'multisite-override-style' ) },
-	{ value: 'solid', label: __( 'Solid', 'multisite-override-style' ) },
-	{ value: 'dashed', label: __( 'Dashed', 'multisite-override-style' ) },
-	{ value: 'dotted', label: __( 'Dotted', 'multisite-override-style' ) },
-	{ value: 'double', label: __( 'Double', 'multisite-override-style' ) },
+	{ value: '', label: __( 'None', 'network-style-override' ) },
+	{ value: 'solid', label: __( 'Solid', 'network-style-override' ) },
+	{ value: 'dashed', label: __( 'Dashed', 'network-style-override' ) },
+	{ value: 'dotted', label: __( 'Dotted', 'network-style-override' ) },
+	{ value: 'double', label: __( 'Double', 'network-style-override' ) },
 ];
 
 export default function BorderControls( { border, onChange } ) {
@@ -33,18 +33,18 @@ export default function BorderControls( { border, onChange } ) {
 	return (
 		<Panel>
 			<PanelBody
-				title={ __( 'Border Defaults', 'multisite-override-style' ) }
+				title={ __( 'Border Defaults', 'network-style-override' ) }
 				initialOpen={ false }
 			>
 				<p className="description">
-					{ __( 'Override default border styles.', 'multisite-override-style' ) }
+					{ __( 'Override default border styles.', 'network-style-override' ) }
 				</p>
 
 				<Flex align="flex-start" gap={ 4 }>
 					<FlexItem>
 						<VStack spacing={ 2 }>
 							<span style={ { fontSize: 11, color: '#757575' } }>
-								{ __( 'Preview', 'multisite-override-style' ) }
+								{ __( 'Preview', 'network-style-override' ) }
 							</span>
 							<div
 								style={ {
@@ -64,14 +64,14 @@ export default function BorderControls( { border, onChange } ) {
 						<VStack spacing={ 3 }>
 							<HStack alignment="stretch" spacing={ 3 }>
 								<UnitControl
-									label={ __( 'Radius', 'multisite-override-style' ) }
+									label={ __( 'Radius', 'network-style-override' ) }
 									value={ border.radius ?? '' }
 									onChange={ ( v ) => update( 'radius', v ) }
 									units={ CSS_UNITS }
 									__nextHasNoMarginBottom
 								/>
 								<UnitControl
-									label={ __( 'Width', 'multisite-override-style' ) }
+									label={ __( 'Width', 'network-style-override' ) }
 									value={ border.width ?? '' }
 									onChange={ ( v ) => update( 'width', v ) }
 									units={ CSS_UNITS }
@@ -81,7 +81,7 @@ export default function BorderControls( { border, onChange } ) {
 
 							<HStack alignment="stretch" spacing={ 3 }>
 								<SelectControl
-									label={ __( 'Style', 'multisite-override-style' ) }
+									label={ __( 'Style', 'network-style-override' ) }
 									value={ border.style ?? '' }
 									options={ BORDER_STYLES }
 									onChange={ ( v ) => update( 'style', v ) }
@@ -91,7 +91,7 @@ export default function BorderControls( { border, onChange } ) {
 
 								<VStack spacing={ 1 }>
 									<span style={ { fontSize: 11, fontWeight: 500, textTransform: 'uppercase' } }>
-										{ __( 'Color', 'multisite-override-style' ) }
+										{ __( 'Color', 'network-style-override' ) }
 									</span>
 									<Dropdown
 										renderToggle={ ( { isOpen, onToggle } ) => (

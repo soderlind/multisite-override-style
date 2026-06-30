@@ -9,7 +9,7 @@ export default function CssEditor( { value, onChange } ) {
 			<p className="description">
 				{ __(
 					'CSS entered here is appended after all theme stylesheets on every subsite front-end (except exempted sites).',
-					'multisite-override-style'
+					'network-style-override'
 				) }
 			</p>
 
