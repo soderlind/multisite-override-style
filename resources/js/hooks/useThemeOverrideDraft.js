@@ -6,10 +6,11 @@ import { useState, useCallback, useMemo } from '@wordpress/element';
  * Owns original/current/dirty semantics so field components can be dumb adapters.
  * Only marks dirty on actual user changes, not auto-population from theme defaults.
  *
- * @param {Object}   initialOverrides       All theme overrides keyed by slug.
- * @param {Function} onSaveThemeOverride    Called with (slug, override) to persist.
- * @param {Function} onDeleteThemeOverride  Called with (slug) to delete.
- * @returns {Object} Draft state and handlers.
+ * @param {Object}   props                       Hook props.
+ * @param {Object}   props.initialOverrides      All theme overrides keyed by slug.
+ * @param {Function} props.onSaveThemeOverride   Called with (slug, override) to persist.
+ * @param {Function} props.onDeleteThemeOverride Called with (slug) to delete.
+ * @return {Object} Draft state and handlers.
  */
 export function useThemeOverrideDraft( {
 	initialOverrides = {},
@@ -32,25 +33,28 @@ export function useThemeOverrideDraft( {
 	 * Update override for a theme.
 	 * If isUserEdit is true, marks as dirty. If false (auto-population), doesn't mark dirty.
 	 */
-	const updateOverride = useCallback( ( slug, override, isUserEdit = true ) => {
-		setOverrides( ( prev ) => ( {
-			...prev,
-			[ slug ]: override,
-		} ) );
+	const updateOverride = useCallback(
+		( slug, override, isUserEdit = true ) => {
+			setOverrides( ( prev ) => ( {
+				...prev,
+				[ slug ]: override,
+			} ) );
 
-		if ( isUserEdit ) {
-			// User edit — mark as dirty and remove from auto-populated.
-			setDirtyThemes( ( prev ) => new Set( [ ...prev, slug ] ) );
-			setAutoPopulated( ( prev ) => {
-				const next = new Set( prev );
-				next.delete( slug );
-				return next;
-			} );
-		} else {
-			// Auto-population — track but don't mark dirty.
-			setAutoPopulated( ( prev ) => new Set( [ ...prev, slug ] ) );
-		}
-	}, [] );
+			if ( isUserEdit ) {
+				// User edit — mark as dirty and remove from auto-populated.
+				setDirtyThemes( ( prev ) => new Set( [ ...prev, slug ] ) );
+				setAutoPopulated( ( prev ) => {
+					const next = new Set( prev );
+					next.delete( slug );
+					return next;
+				} );
+			} else {
+				// Auto-population — track but don't mark dirty.
+				setAutoPopulated( ( prev ) => new Set( [ ...prev, slug ] ) );
+			}
+		},
+		[]
+	);
 
 	/**
 	 * Auto-populate override from theme defaults.
@@ -60,7 +64,11 @@ export function useThemeOverrideDraft( {
 		setOverrides( ( prev ) => {
 			// Only populate if no existing override.
 			const existing = prev[ slug ];
-			if ( existing && ( existing.css || Object.keys( existing.theme_json || {} ).length > 0 ) ) {
+			if (
+				existing &&
+				( existing.css ||
+					Object.keys( existing.theme_json || {} ).length > 0 )
+			) {
 				return prev;
 			}
 			return {
@@ -74,22 +82,25 @@ export function useThemeOverrideDraft( {
 	/**
 	 * Reset a theme's override to original values.
 	 */
-	const resetToOriginal = useCallback( ( slug ) => {
-		setOverrides( ( prev ) => ( {
-			...prev,
-			[ slug ]: originals[ slug ] ?? { css: '', theme_json: {} },
-		} ) );
-		setDirtyThemes( ( prev ) => {
-			const next = new Set( prev );
-			next.delete( slug );
-			return next;
-		} );
-		setAutoPopulated( ( prev ) => {
-			const next = new Set( prev );
-			next.delete( slug );
-			return next;
-		} );
-	}, [ originals ] );
+	const resetToOriginal = useCallback(
+		( slug ) => {
+			setOverrides( ( prev ) => ( {
+				...prev,
+				[ slug ]: originals[ slug ] ?? { css: '', theme_json: {} },
+			} ) );
+			setDirtyThemes( ( prev ) => {
+				const next = new Set( prev );
+				next.delete( slug );
+				return next;
+			} );
+			setAutoPopulated( ( prev ) => {
+				const next = new Set( prev );
+				next.delete( slug );
+				return next;
+			} );
+		},
+		[ originals ]
+	);
 
 	/**
 	 * Reset a theme's override to theme defaults (from original theme.json).
@@ -97,7 +108,11 @@ export function useThemeOverrideDraft( {
 	const resetToDefaults = useCallback( ( slug, themeJson ) => {
 		setOverrides( ( prev ) => ( {
 			...prev,
-			[ slug ]: { ...( prev[ slug ] ?? {} ), css: prev[ slug ]?.css ?? '', theme_json: themeJson },
+			[ slug ]: {
+				...( prev[ slug ] ?? {} ),
+				css: prev[ slug ]?.css ?? '',
+				theme_json: themeJson,
+			},
 		} ) );
 		setDirtyThemes( ( prev ) => new Set( [ ...prev, slug ] ) );
 	}, [] );
@@ -127,30 +142,33 @@ export function useThemeOverrideDraft( {
 	/**
 	 * Delete a theme override.
 	 */
-	const deleteOverride = useCallback( async ( slug ) => {
-		await onDeleteThemeOverride( slug );
+	const deleteOverride = useCallback(
+		async ( slug ) => {
+			await onDeleteThemeOverride( slug );
 
-		setOverrides( ( prev ) => {
-			const next = { ...prev };
-			delete next[ slug ];
-			return next;
-		} );
-		setOriginals( ( prev ) => {
-			const next = { ...prev };
-			delete next[ slug ];
-			return next;
-		} );
-		setDirtyThemes( ( prev ) => {
-			const next = new Set( prev );
-			next.delete( slug );
-			return next;
-		} );
-		setAutoPopulated( ( prev ) => {
-			const next = new Set( prev );
-			next.delete( slug );
-			return next;
-		} );
-	}, [ onDeleteThemeOverride ] );
+			setOverrides( ( prev ) => {
+				const next = { ...prev };
+				delete next[ slug ];
+				return next;
+			} );
+			setOriginals( ( prev ) => {
+				const next = { ...prev };
+				delete next[ slug ];
+				return next;
+			} );
+			setDirtyThemes( ( prev ) => {
+				const next = new Set( prev );
+				next.delete( slug );
+				return next;
+			} );
+			setAutoPopulated( ( prev ) => {
+				const next = new Set( prev );
+				next.delete( slug );
+				return next;
+			} );
+		},
+		[ onDeleteThemeOverride ]
+	);
 
 	/**
 	 * Sync with externally loaded overrides (e.g., after import).
@@ -165,24 +183,36 @@ export function useThemeOverrideDraft( {
 	/**
 	 * Get override for a specific theme.
 	 */
-	const getOverride = useCallback( ( slug ) => {
-		return overrides[ slug ] ?? { css: '', theme_json: {} };
-	}, [ overrides ] );
+	const getOverride = useCallback(
+		( slug ) => {
+			return overrides[ slug ] ?? { css: '', theme_json: {} };
+		},
+		[ overrides ]
+	);
 
 	/**
 	 * Check if any themes have unsaved changes.
 	 */
-	const hasDirtyChanges = useMemo( () => dirtyThemes.size > 0, [ dirtyThemes ] );
+	const hasDirtyChanges = useMemo(
+		() => dirtyThemes.size > 0,
+		[ dirtyThemes ]
+	);
 
 	/**
 	 * Check if a specific theme has unsaved changes.
 	 */
-	const isDirty = useCallback( ( slug ) => dirtyThemes.has( slug ), [ dirtyThemes ] );
+	const isDirty = useCallback(
+		( slug ) => dirtyThemes.has( slug ),
+		[ dirtyThemes ]
+	);
 
 	/**
 	 * Check if a specific theme was auto-populated (not user-edited).
 	 */
-	const isAutoPopulated = useCallback( ( slug ) => autoPopulated.has( slug ), [ autoPopulated ] );
+	const isAutoPopulated = useCallback(
+		( slug ) => autoPopulated.has( slug ),
+		[ autoPopulated ]
+	);
 
 	return {
 		// State.

@@ -38,6 +38,9 @@ export default function App() {
 		onDeleteThemeOverride: deleteThemeOverride,
 	} );
 
+	// Extract stable callback to avoid infinite loop in useEffect.
+	const { syncFromExternal } = themeOverrideDraft;
+
 	const load = useCallback( async () => {
 		try {
 			const data = await getSettings();
@@ -58,7 +61,7 @@ export default function App() {
 				getThemeOverrides(),
 			] );
 			setThemes( themesData );
-			themeOverrideDraft.syncFromExternal( overridesData );
+			syncFromExternal( overridesData );
 		} catch ( e ) {
 			setError(
 				e.message ??
@@ -70,7 +73,7 @@ export default function App() {
 		} finally {
 			setThemesLoading( false );
 		}
-	}, [ themeOverrideDraft ] );
+	}, [ syncFromExternal ] );
 
 	useEffect( () => {
 		load();
