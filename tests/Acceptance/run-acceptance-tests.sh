@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #
 # Acceptance tests for Multisite Override Style plugin.
-# Requires: WP-CLI, running Local by Flywheel site, network-activated plugin.
+# Requires: WP-CLI via wp-cli-local wrapper, running Local by Flywheel site, network-activated plugin.
 #
 # Usage:
-#   ./tests/Acceptance/run-acceptance-tests.sh [--url=http://plugins.local/]
+#   ./tests/Acceptance/run-acceptance-tests.sh [--site=plugins]
 #
 set -euo pipefail
 
@@ -14,9 +14,12 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Default URL
-SITE_URL="${1:-http://plugins.local/}"
-SITE_URL="${SITE_URL#--url=}"
+# wp-cli-local wrapper path
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+WP_CLI_LOCAL="${HOME}/.agents/skills/wp-cli-local/scripts/wp"
+
+# Site name for wp-cli-local (auto-detect from cwd or use argument)
+SITE_ARG="${1:-}"
 
 # Counters
 TESTS_PASSED=0
@@ -26,25 +29,29 @@ TESTS_SKIPPED=0
 # Plugin slug (note: typo in directory name)
 PLUGIN_SLUG="multisite-overide-style"
 
-# WP-CLI wrapper
+# WP-CLI wrapper using wp-cli-local
 wp_cmd() {
-    wp --url="$SITE_URL" "$@"
+    if [[ -n "$SITE_ARG" ]]; then
+        bash "$WP_CLI_LOCAL" "$SITE_ARG" "$@"
+    else
+        bash "$WP_CLI_LOCAL" "$@"
+    fi
 }
 
 # Test helpers
 pass() {
     echo -e "${GREEN}✓ PASS:${NC} $1"
-    ((TESTS_PASSED++))
+    ((++TESTS_PASSED))
 }
 
 fail() {
     echo -e "${RED}✗ FAIL:${NC} $1"
-    ((TESTS_FAILED++))
+    ((++TESTS_FAILED))
 }
 
 skip() {
     echo -e "${YELLOW}○ SKIP:${NC} $1"
-    ((TESTS_SKIPPED++))
+    ((++TESTS_SKIPPED))
 }
 
 section() {
@@ -56,16 +63,23 @@ section() {
 check_prerequisites() {
     section "Prerequisites"
 
+    # Check wp-cli-local wrapper exists
+    if [[ ! -f "$WP_CLI_LOCAL" ]]; then
+        fail "wp-cli-local wrapper not found at $WP_CLI_LOCAL"
+        exit 1
+    fi
+    pass "wp-cli-local wrapper available"
+
     # Check WP-CLI
     if ! command -v wp &> /dev/null; then
-        fail "WP-CLI not found"
+        fail "WP-CLI not found in PATH"
         exit 1
     fi
     pass "WP-CLI available"
 
     # Check database connection
     if ! wp_cmd core version &> /dev/null; then
-        fail "Cannot connect to WordPress at $SITE_URL"
+        fail "Cannot connect to WordPress"
         echo "Make sure Local by Flywheel site is running."
         exit 1
     fi
@@ -412,7 +426,7 @@ print_summary() {
 # Main
 main() {
     echo "Multisite Override Style - Acceptance Tests"
-    echo "Site: $SITE_URL"
+    echo "Using: wp-cli-local wrapper"
     echo ""
 
     check_prerequisites
