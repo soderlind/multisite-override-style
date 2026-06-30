@@ -2,6 +2,9 @@
 
 Network-wide CSS and `theme.json` overrides for WordPress Multisite. Enforce brand consistency across all subsites from a single admin panel.
 
+<img width="100%"  alt="Screenshot 2026-06-30 at 20 01 25" src="https://github.com/user-attachments/assets/ca69a5f8-222c-4a45-9b20-6504086e797d" />
+
+
 ## Features
 
 - **CSS Override** — CodeMirror editor, appended after all theme stylesheets (priority 9999)
@@ -13,7 +16,6 @@ Network-wide CSS and `theme.json` overrides for WordPress Multisite. Enforce bra
 - **Import / Export** — JSON bundle for dev → staging → production promotion
 - **Block Theme Aware** — `theme.json` applies to block themes only; classic themes get CSS only
 
-<img width="100%"  alt="Screenshot 2026-06-30 at 20 01 25" src="https://github.com/user-attachments/assets/ca69a5f8-222c-4a45-9b20-6504086e797d" />
 
 
 ## Requirements
