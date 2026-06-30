@@ -6,15 +6,15 @@
  * request context. Handles exemption checks, preview vs live, and theme-specific
  * overrides in one place instead of duplicating across CssOverride and ThemeJsonOverride.
  *
- * @package MultisiteOverrideStyle
+ * @package NetworkStyleOverride
  */
 
 declare( strict_types=1 );
 
-namespace MultisiteOverrideStyle\Service;
+namespace NetworkStyleOverride\Service;
 
-use MultisiteOverrideStyle\Preview\PreviewHandler;
-use MultisiteOverrideStyle\Storage\SettingsRepository;
+use NetworkStyleOverride\Preview\PreviewHandler;
+use NetworkStyleOverride\Storage\SettingsRepository;
 
 /**
  * Resolves the effective CSS and theme.json for the current request.

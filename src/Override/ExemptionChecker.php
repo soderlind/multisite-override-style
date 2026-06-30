@@ -2,9 +2,9 @@
 
 declare( strict_types=1 );
 
-namespace MultisiteOverrideStyle\Override;
+namespace NetworkStyleOverride\Override;
 
-use MultisiteOverrideStyle\Storage\SettingsRepository;
+use NetworkStyleOverride\Storage\SettingsRepository;
 
 final class ExemptionChecker {
 

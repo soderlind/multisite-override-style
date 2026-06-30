@@ -2,23 +2,23 @@
 
 declare( strict_types=1 );
 
-namespace MultisiteOverrideStyle\Preview;
+namespace NetworkStyleOverride\Preview;
 
-use MultisiteOverrideStyle\Storage\SettingsRepository;
+use NetworkStyleOverride\Storage\SettingsRepository;
 
 /**
  * Manages the transient-backed Draft Override used for previewing unsaved changes.
  *
  * Flow:
  *  1. Admin POSTs draft CSS + theme.json to REST endpoint → stored in transient with a token.
- *  2. REST response includes a preview URL with ?mos_preview=TOKEN.
- *  3. On the front-end, if ?mos_preview=TOKEN is present and the visitor is a
+ *  2. REST response includes a preview URL with ?nso_preview=TOKEN.
+ *  3. On the front-end, if ?nso_preview=TOKEN is present and the visitor is a
  *     network admin, the draft values are used instead of live settings.
  *  4. The draft expires automatically after DRAFT_TTL seconds.
  */
 final class PreviewHandler {
 
-	private const TRANSIENT_PREFIX = 'mos_draft_';
+	private const TRANSIENT_PREFIX = 'nso_draft_';
 	private const DRAFT_TTL        = 3600; // 1 hour
 
 	private ?string $active_token = null;
@@ -32,7 +32,7 @@ final class PreviewHandler {
 
 	public function detect_token(): void {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$token = isset( $_GET['mos_preview'] ) ? sanitize_key( $_GET['mos_preview'] ) : '';
+		$token = isset( $_GET['nso_preview'] ) ? sanitize_key( $_GET['nso_preview'] ) : '';
 
 		if ( $token === '' ) {
 			return;

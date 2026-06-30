@@ -48,7 +48,7 @@ export default function App() {
 		} catch ( e ) {
 			setError(
 				e.message ??
-					__( 'Failed to load settings.', 'multisite-override-style' )
+					__( 'Failed to load settings.', 'network-style-override' )
 			);
 		}
 	}, [] );
@@ -67,7 +67,7 @@ export default function App() {
 				e.message ??
 					__(
 						'Failed to load theme data.',
-						'multisite-override-style'
+						'network-style-override'
 					)
 			);
 		} finally {
@@ -95,7 +95,7 @@ export default function App() {
 			setTimeout( () => setSaved( false ), 3000 );
 		} catch ( e ) {
 			setError(
-				e.message ?? __( 'Save failed.', 'multisite-override-style' )
+				e.message ?? __( 'Save failed.', 'network-style-override' )
 			);
 		} finally {
 			setSaving( false );
@@ -114,7 +114,7 @@ export default function App() {
 			setTimeout( () => setSaved( false ), 3000 );
 		} catch ( e ) {
 			setError(
-				e.message ?? __( 'Delete failed.', 'multisite-override-style' )
+				e.message ?? __( 'Delete failed.', 'network-style-override' )
 			);
 		} finally {
 			setDeleting( false );
@@ -135,7 +135,7 @@ export default function App() {
 			window.open( preview_url, '_blank', 'noopener,noreferrer' );
 		} catch ( e ) {
 			setError(
-				e.message ?? __( 'Preview failed.', 'multisite-override-style' )
+				e.message ?? __( 'Preview failed.', 'network-style-override' )
 			);
 		}
 	};
@@ -174,16 +174,16 @@ export default function App() {
 	}
 
 	const tabs = [
-		{ name: 'css', title: __( 'CSS', 'multisite-override-style' ) },
+		{ name: 'css', title: __( 'CSS', 'network-style-override' ) },
 		{
 			name: 'theme-overrides',
-			title: __( 'Theme Overrides', 'multisite-override-style' ),
+			title: __( 'Theme Overrides', 'network-style-override' ),
 		},
-		{ name: 'sites', title: __( 'Sites', 'multisite-override-style' ) },
-		{ name: 'history', title: __( 'History', 'multisite-override-style' ) },
+		{ name: 'sites', title: __( 'Sites', 'network-style-override' ) },
+		{ name: 'history', title: __( 'History', 'network-style-override' ) },
 		{
 			name: 'import',
-			title: __( 'Import / Export', 'multisite-override-style' ),
+			title: __( 'Import / Export', 'network-style-override' ),
 		},
 	];
 
@@ -197,7 +197,7 @@ export default function App() {
 				<h1>
 					{ __(
 						'Network Style Override',
-						'multisite-override-style'
+						'network-style-override'
 					) }
 				</h1>
 
@@ -208,7 +208,7 @@ export default function App() {
 				) }
 				{ saved && (
 					<Notice status="success" isDismissible={ false }>
-						{ __( 'Settings saved.', 'multisite-override-style' ) }
+						{ __( 'Settings saved.', 'network-style-override' ) }
 					</Notice>
 				) }
 			</div>
@@ -256,7 +256,7 @@ export default function App() {
 						isBusy={ saving }
 						disabled={ saving }
 					>
-						{ __( 'Save', 'multisite-override-style' ) }
+						{ __( 'Save', 'network-style-override' ) }
 					</Button>
 
 					{ activeTab === 'css' && (
@@ -267,7 +267,7 @@ export default function App() {
 						>
 							{ __(
 								'Preview on site',
-								'multisite-override-style'
+								'network-style-override'
 							) }
 						</Button>
 					) }

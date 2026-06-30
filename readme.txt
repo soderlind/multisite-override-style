@@ -1,10 +1,10 @@
-=== Multisite Override Style ===
+=== Network Style Override ===
 Contributors: soderlind
 Tags: multisite, network, css, theme.json, branding, global styles
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 0.6.1
+Stable tag: 0.7.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Enforce network-wide CSS and theme.json overrides across all subsites in a WordP
 
 == Description ==
 
-**Multisite Override Style** gives network administrators centralized control over front-end styling across every subsite. Define CSS rules and `theme.json` values once, and they're automatically applied network-wide — ensuring brand consistency without touching individual site themes.
+**Network Style Override** gives network administrators centralized control over front-end styling across every subsite. Define CSS rules and `theme.json` values once, and they're automatically applied network-wide — ensuring brand consistency without touching individual site themes.
 
 = Key Features =
 
@@ -35,7 +35,7 @@ Enforce network-wide CSS and theme.json overrides across all subsites in a WordP
 
 = From GitHub Release (recommended) =
 
-1. Download the latest `multisite-override-style.zip` from the [GitHub Releases page](https://github.com/soderlind/multisite-override-style/releases).
+1. Download the latest `network-style-override.zip` from the [GitHub Releases page](https://github.com/soderlind/network-style-override/releases).
 2. Go to **Network Admin → Plugins → Add New → Upload Plugin** and upload the zip file.
 3. Click **Network Activate**.
 4. Navigate to **Network Admin → Themes → Override Style** to configure.
@@ -44,7 +44,7 @@ The plugin includes automatic updates — you'll receive update notifications in
 
 = Manual Installation =
 
-1. Upload the `multisite-override-style` folder to `/wp-content/plugins/`.
+1. Upload the `network-style-override` folder to `/wp-content/plugins/`.
 2. Go to **Network Admin → Plugins** and click **Network Activate**.
 3. Navigate to **Network Admin → Themes → Override Style** to configure.
 
@@ -79,6 +79,14 @@ Yes. Click **Preview on site** to open a new tab with your unsaved changes appli
 5. Revision history with one-click restore
 
 == Changelog ==
+
+= 0.7.0 =
+* BREAKING: Renamed plugin from "Multisite Override Style" to "Network Style Override".
+* BREAKING: Changed PHP namespace from MultisiteOverrideStyle to NetworkStyleOverride.
+* BREAKING: Changed REST namespace from mos/v1 to nso/v1.
+* BREAKING: Changed option keys from mos_* to nso_*.
+* BREAKING: Changed CSS/script handles from mos-* to nso-*.
+* Add: Automatic migration for existing mos_* options to nso_* keys on first load.
 
 = 0.6.1 =
 * Fix: CSS override now prints at the end of <head> for proper cascade order.
@@ -143,4 +151,4 @@ Yes. Click **Preview on site** to open a new tab with your unsaved changes appli
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release of Multisite Override Style.
+Initial release of Network Style Override.

@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-06-30
+
+### Changed (BREAKING)
+
+- Renamed plugin from "Multisite Override Style" to "Network Style Override".
+- Changed PHP namespace from `MultisiteOverrideStyle` to `NetworkStyleOverride`.
+- Changed REST namespace from `mos/v1` to `nso/v1`.
+- Changed option keys from `mos_*` to `nso_*`.
+- Changed CSS/script handles from `mos-*` to `nso-*`.
+
+### Added
+
+- Automatic migration for existing `mos_*` options to `nso_*` keys on first load.
+
 ## [0.6.1] - 2026-06-30
 
 ### Fixed
@@ -33,7 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- REST endpoint to fetch original theme.json from active theme (`GET /mos/v1/theme-json/{slug}`).
+- REST endpoint to fetch original theme.json from active theme (`GET /nso/v1/theme-json/{slug}`).
 - Auto-load theme presets (colors, fonts, spacing) when selecting a theme in Theme Overrides.
 - "Reset to theme defaults" button in Theme Overrides to restore original theme values.
 
@@ -122,10 +136,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Nonce verification on Edit Site screen form
 - Preview token validated against transient and requires `manage_network`
 
-[Unreleased]: https://github.com/soderlind/multisite-override-style/compare/0.4.2...HEAD
-[0.4.2]: https://github.com/soderlind/multisite-override-style/compare/0.4.1...0.4.2
-[0.4.1]: https://github.com/soderlind/multisite-override-style/compare/0.4.0...0.4.1
-[0.4.0]: https://github.com/soderlind/multisite-override-style/compare/0.3.2...0.4.0
-[0.3.2]: https://github.com/soderlind/multisite-override-style/compare/0.3.1...0.3.2
-[0.3.1]: https://github.com/soderlind/multisite-override-style/compare/0.3.0...0.3.1
-[0.3.0]: https://github.com/soderlind/multisite-override-style/releases/tag/0.3.0
+[Unreleased]: https://github.com/soderlind/network-style-override/compare/0.4.2...HEAD
+[0.4.2]: https://github.com/soderlind/network-style-override/compare/0.4.1...0.4.2
+[0.4.1]: https://github.com/soderlind/network-style-override/compare/0.4.0...0.4.1
+[0.4.0]: https://github.com/soderlind/network-style-override/compare/0.3.2...0.4.0
+[0.3.2]: https://github.com/soderlind/network-style-override/compare/0.3.1...0.3.2
+[0.3.1]: https://github.com/soderlind/network-style-override/compare/0.3.0...0.3.1
+[0.3.0]: https://github.com/soderlind/network-style-override/releases/tag/0.3.0

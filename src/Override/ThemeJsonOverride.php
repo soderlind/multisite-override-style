@@ -2,9 +2,9 @@
 
 declare( strict_types=1 );
 
-namespace MultisiteOverrideStyle\Override;
+namespace NetworkStyleOverride\Override;
 
-use MultisiteOverrideStyle\Service\EffectiveOverrideResolver;
+use NetworkStyleOverride\Service\EffectiveOverrideResolver;
 use WP_Theme_JSON_Data;
 
 /**

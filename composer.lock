@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "777e3042627771a9c1ff638422f27ae7",
+    "content-hash": "b79b449a0a1a3fa8524dee8c25fd8f8e",
     "packages": [
         {
             "name": "soderlind/wordpress-github-updater",

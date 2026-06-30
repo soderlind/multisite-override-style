@@ -2,11 +2,11 @@
 
 declare( strict_types=1 );
 
-namespace MultisiteOverrideStyle\Tests\Unit\Storage;
+namespace NetworkStyleOverride\Tests\Unit\Storage;
 
 use Brain\Monkey;
 use Brain\Monkey\Functions;
-use MultisiteOverrideStyle\Storage\SettingsRepository;
+use NetworkStyleOverride\Storage\SettingsRepository;
 use PHPUnit\Framework\TestCase;
 
 final class SettingsRepositoryTest extends TestCase {

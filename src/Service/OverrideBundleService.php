@@ -6,16 +6,16 @@
  * All bundle semantics (what settings travel together, payload shape, save ordering)
  * are concentrated here instead of scattered across controllers and UI.
  *
- * @package MultisiteOverrideStyle
+ * @package NetworkStyleOverride
  */
 
 declare( strict_types=1 );
 
-namespace MultisiteOverrideStyle\Service;
+namespace NetworkStyleOverride\Service;
 
-use MultisiteOverrideStyle\Preview\PreviewHandler;
-use MultisiteOverrideStyle\Storage\RevisionRepository;
-use MultisiteOverrideStyle\Storage\SettingsRepository;
+use NetworkStyleOverride\Preview\PreviewHandler;
+use NetworkStyleOverride\Storage\RevisionRepository;
+use NetworkStyleOverride\Storage\SettingsRepository;
 
 /**
  * Deep module for network override bundle operations.
@@ -120,7 +120,7 @@ final class OverrideBundleService {
 	 */
 	public function export(): array {
 		return [
-			'version'         => MOS_VERSION,
+			'version'         => NSO_VERSION,
 			'exported'        => gmdate( 'c' ),
 			'css'             => $this->settings->get_css(),
 			'theme_json'      => $this->settings->get_theme_json(),
@@ -183,7 +183,7 @@ final class OverrideBundleService {
 		$token = $this->preview->create_draft( $css, $theme_json );
 
 		$base_url    = $site_url !== '' ? $site_url : network_home_url( '/' );
-		$preview_url = add_query_arg( 'mos_preview', $token, $base_url );
+		$preview_url = add_query_arg( 'nso_preview', $token, $base_url );
 
 		return [
 			'token'       => $token,
