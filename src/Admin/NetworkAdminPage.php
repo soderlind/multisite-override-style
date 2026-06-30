@@ -30,7 +30,7 @@ final class NetworkAdminPage {
 
 	public function add_menu(): void {
 		add_submenu_page(
-			'settings.php',
+			'themes.php',
 			__( 'Override Style', 'multisite-override-style' ),
 			__( 'Override Style', 'multisite-override-style' ),
 			self::CAPABILITY,
@@ -48,7 +48,7 @@ final class NetworkAdminPage {
 	}
 
 	public function enqueue_assets( string $hook ): void {
-		if ( $hook !== 'settings_page_' . self::MENU_SLUG ) {
+		if ( $hook !== 'appearance_page_' . self::MENU_SLUG ) {
 			return;
 		}
 

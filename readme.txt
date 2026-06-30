@@ -35,7 +35,7 @@ Enforce network-wide CSS and theme.json overrides across all subsites in a WordP
 
 1. Upload the `multisite-override-style` folder to `/wp-content/plugins/`.
 2. Go to **Network Admin → Plugins** and click **Network Activate**.
-3. Navigate to **Network Admin → Settings → Override Style** to configure.
+3. Navigate to **Network Admin → Themes → Override Style** to configure.
 
 == Frequently Asked Questions ==
 

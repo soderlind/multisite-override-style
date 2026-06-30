@@ -33,7 +33,7 @@ Then **Network Activate** from Network Admin → Plugins.
 
 ## Usage
 
-Navigate to **Network Admin → Settings → Override Style**.
+Navigate to **Network Admin → Themes → Override Style**.
 
 | Tab | Purpose |
 |-----|---------|
