@@ -21,6 +21,16 @@ Network-wide CSS and `theme.json` overrides for WordPress Multisite. Enforce bra
 
 ## Installation
 
+### From GitHub Release (recommended)
+
+1. Download the latest `multisite-override-style.zip` from [Releases](https://github.com/soderlind/multisite-override-style/releases)
+2. Upload via **Network Admin → Plugins → Add New → Upload Plugin**
+3. **Network Activate** from Network Admin → Plugins
+
+The plugin includes automatic updates — you'll see new versions in WordPress like any other plugin.
+
+### For Development
+
 ```bash
 cd wp-content/plugins
 git clone https://github.com/soderlind/multisite-override-style.git
@@ -61,7 +71,7 @@ npm run lint:js
 
 ### Project Structure
 
-```
+```text
 ├── multisite-override-style.php   # Plugin bootstrap
 ├── src/
 │   ├── Plugin.php                 # Hook wiring

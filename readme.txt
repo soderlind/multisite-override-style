@@ -1,5 +1,5 @@
 === Multisite Override Style ===
-Contributors: yourname
+Contributors: soderlind
 Tags: multisite, network, css, theme.json, branding, global styles
 Requires at least: 6.8
 Tested up to: 7.0
@@ -32,6 +32,17 @@ Enforce network-wide CSS and theme.json overrides across all subsites in a WordP
 * Network activation (plugin cannot be activated per-site)
 
 == Installation ==
+
+= From GitHub Release (recommended) =
+
+1. Download the latest `multisite-override-style.zip` from the [GitHub Releases page](https://github.com/soderlind/multisite-override-style/releases).
+2. Go to **Network Admin → Plugins → Add New → Upload Plugin** and upload the zip file.
+3. Click **Network Activate**.
+4. Navigate to **Network Admin → Themes → Override Style** to configure.
+
+The plugin includes automatic updates — you'll receive update notifications in WordPress just like plugins from wordpress.org.
+
+= Manual Installation =
 
 1. Upload the `multisite-override-style` folder to `/wp-content/plugins/`.
 2. Go to **Network Admin → Plugins** and click **Network Activate**.
