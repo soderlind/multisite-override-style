@@ -1,0 +1,304 @@
+# Copyright (C) 2026
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Multisite Override Style 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-06-30T00:00:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI\n"
+"X-Domain: multisite-override-style\n"
+
+#: src/Admin/NetworkAdminPage.php:36
+#: src/Admin/NetworkAdminPage.php:37
+msgid "Override Style"
+msgstr ""
+
+#: src/Admin/NetworkAdminPage.php:43
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: src/Admin/EditSiteScreen.php:40
+msgid "Exempt this site from the network CSS and theme.json overrides."
+msgstr ""
+
+#: src/Admin/RestController.php:119
+msgid "Revision not found."
+msgstr ""
+
+#: resources/js/components/App.jsx:54
+msgid "Failed to load settings."
+msgstr ""
+
+#: resources/js/components/App.jsx:65
+msgid "Save failed."
+msgstr ""
+
+#: resources/js/components/App.jsx:79
+msgid "Preview failed."
+msgstr ""
+
+#: resources/js/components/App.jsx:97
+msgid "Settings saved."
+msgstr ""
+
+#: resources/js/components/App.jsx:101
+msgid "CSS"
+msgstr ""
+
+#: resources/js/components/App.jsx:102
+msgid "theme.json"
+msgstr ""
+
+#: resources/js/components/App.jsx:103
+msgid "Sites"
+msgstr ""
+
+#: resources/js/components/App.jsx:104
+msgid "History"
+msgstr ""
+
+#: resources/js/components/App.jsx:105
+msgid "Import / Export"
+msgstr ""
+
+#: resources/js/components/App.jsx:108
+msgid "Network Style Override"
+msgstr ""
+
+#: resources/js/components/App.jsx:134
+msgid "Save"
+msgstr ""
+
+#: resources/js/components/App.jsx:141
+msgid "Preview on site"
+msgstr ""
+
+#: resources/js/components/CssEditor.jsx:10
+msgid "CSS entered here is appended after all theme stylesheets on every subsite front-end (except exempted sites)."
+msgstr ""
+
+#: resources/js/components/ThemeJsonEditor/index.jsx:13
+msgid "Values are deep-merged into the user (Global Styles) layer — network values take precedence. Applies to block themes only."
+msgstr ""
+
+#: resources/js/components/ThemeJsonEditor/index.jsx:18
+msgid "Visual"
+msgstr ""
+
+#: resources/js/components/ThemeJsonEditor/index.jsx:19
+msgid "Raw JSON"
+msgstr ""
+
+#: resources/js/components/ThemeJsonEditor/RawJsonTab.jsx:21
+msgid "Invalid JSON — changes will not be saved until fixed."
+msgstr ""
+
+#: resources/js/components/visual-fields/ColorPalette.jsx:17
+msgid "Pick color"
+msgstr ""
+
+#: resources/js/components/visual-fields/ColorPalette.jsx:28
+msgid "Name"
+msgstr ""
+
+#: resources/js/components/visual-fields/ColorPalette.jsx:36
+msgid "Slug"
+msgstr ""
+
+#: resources/js/components/visual-fields/ColorPalette.jsx:44
+msgid "Remove"
+msgstr ""
+
+#: resources/js/components/visual-fields/ColorPalette.jsx:57
+msgid "Color Palette"
+msgstr ""
+
+#: resources/js/components/visual-fields/ColorPalette.jsx:69
+msgid "+ Add color"
+msgstr ""
+
+#: resources/js/components/visual-fields/Typography.jsx:50
+msgid "Font Families"
+msgstr ""
+
+#: resources/js/components/visual-fields/Typography.jsx:62
+msgid "Font Family CSS"
+msgstr ""
+
+#: resources/js/components/visual-fields/Typography.jsx:74
+msgid "+ Add font family"
+msgstr ""
+
+#: resources/js/components/visual-fields/Typography.jsx:80
+msgid "Font Sizes"
+msgstr ""
+
+#: resources/js/components/visual-fields/Typography.jsx:92
+msgid "Size (CSS value)"
+msgstr ""
+
+#: resources/js/components/visual-fields/Typography.jsx:104
+msgid "+ Add font size"
+msgstr ""
+
+#: resources/js/components/visual-fields/Spacing.jsx:22
+msgid "Spacing Scale"
+msgstr ""
+
+#: resources/js/components/visual-fields/Spacing.jsx:24
+msgid "Define named spacing sizes used for padding, margin, and gap presets."
+msgstr ""
+
+#: resources/js/components/visual-fields/Spacing.jsx:47
+msgid "+ Add spacing size"
+msgstr ""
+
+#: resources/js/components/visual-fields/BorderControls.jsx:14
+msgid "Border Defaults"
+msgstr ""
+
+#: resources/js/components/visual-fields/BorderControls.jsx:17
+msgid "Border Radius"
+msgstr ""
+
+#: resources/js/components/visual-fields/BorderControls.jsx:21
+msgid "Applied globally via styles.border.radius in theme.json."
+msgstr ""
+
+#: resources/js/components/visual-fields/BorderControls.jsx:24
+msgid "Border Width"
+msgstr ""
+
+#: resources/js/components/visual-fields/BorderControls.jsx:28
+msgid "Applied globally via styles.border.width in theme.json."
+msgstr ""
+
+#: resources/js/components/visual-fields/BorderControls.jsx:31
+msgid "Border Style"
+msgstr ""
+
+#: resources/js/components/visual-fields/BorderControls.jsx:37
+msgid "Border Color"
+msgstr ""
+
+#: resources/js/components/ExemptionList.jsx:19
+msgid "Failed to load sites."
+msgstr ""
+
+#: resources/js/components/ExemptionList.jsx:34
+msgid "Failed to update exemption."
+msgstr ""
+
+#: resources/js/components/ExemptionList.jsx:51
+msgid "Exempted sites will not receive any network CSS or theme.json overrides."
+msgstr ""
+
+#: resources/js/components/ExemptionList.jsx:61
+msgid "Search sites…"
+msgstr ""
+
+#: resources/js/components/ExemptionList.jsx:66
+msgid "Site"
+msgstr ""
+
+#: resources/js/components/ExemptionList.jsx:67
+msgid "URL"
+msgstr ""
+
+#: resources/js/components/ExemptionList.jsx:68
+msgid "Exempt from overrides"
+msgstr ""
+
+#: resources/js/components/ExemptionList.jsx:88
+msgid "No sites found."
+msgstr ""
+
+#: resources/js/components/RevisionHistory.jsx:19
+msgid "Failed to load revisions."
+msgstr ""
+
+#: resources/js/components/RevisionHistory.jsx:26
+msgid "Restore this revision? The current settings will be saved as a new revision first."
+msgstr ""
+
+#: resources/js/components/RevisionHistory.jsx:37
+msgid "Restore failed."
+msgstr ""
+
+#: resources/js/components/RevisionHistory.jsx:46
+msgid "The last 10 saves are kept. Restoring a revision saves the current settings as a new revision first."
+msgstr ""
+
+#: resources/js/components/RevisionHistory.jsx:54
+msgid "No revisions yet. Save your settings to create the first revision."
+msgstr ""
+
+#: resources/js/components/RevisionHistory.jsx:58
+msgid "Saved"
+msgstr ""
+
+#: resources/js/components/RevisionHistory.jsx:59
+msgid "Author"
+msgstr ""
+
+#: resources/js/components/RevisionHistory.jsx:68
+msgid "current"
+msgstr ""
+
+#: resources/js/components/RevisionHistory.jsx:78
+msgid "Restore"
+msgstr ""
+
+#: resources/js/components/ImportExport.jsx:26
+msgid "Export failed."
+msgstr ""
+
+#: resources/js/components/ImportExport.jsx:37
+msgid "This will overwrite all current settings (CSS, theme.json, exemptions). The current settings will be saved as a revision first. Continue?"
+msgstr ""
+
+#: resources/js/components/ImportExport.jsx:50
+msgid "Invalid bundle: missing css or theme_json fields."
+msgstr ""
+
+#: resources/js/components/ImportExport.jsx:61
+msgid "Settings imported successfully."
+msgstr ""
+
+#: resources/js/components/ImportExport.jsx:63
+msgid "Import failed. Make sure the file is a valid MOS export."
+msgstr ""
+
+#: resources/js/components/ImportExport.jsx:79
+msgid "Export"
+msgstr ""
+
+#: resources/js/components/ImportExport.jsx:80
+msgid "Download all current settings (CSS, theme.json, exemptions) as a JSON file."
+msgstr ""
+
+#: resources/js/components/ImportExport.jsx:82
+msgid "Export settings"
+msgstr ""
+
+#: resources/js/components/ImportExport.jsx:87
+msgid "Import"
+msgstr ""
+
+#: resources/js/components/ImportExport.jsx:88
+msgid "Import settings from a previously exported JSON file. Current settings will be preserved as a revision."
+msgstr ""
+
+#: resources/js/components/ImportExport.jsx:94
+msgid "Select JSON file to import"
+msgstr ""
+
+#: resources/js/components/ImportExport.jsx:101
+msgid "Import settings…"
+msgstr ""
