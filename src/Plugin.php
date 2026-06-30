@@ -28,11 +28,11 @@ final class Plugin {
 
 		( new CssOverride( $settings, $exemption, $preview ) )->register();
 		( new ThemeJsonOverride( $settings, $exemption, $preview ) )->register();
+		( new RestController( $settings, $revisions, $exemption, $preview ) )->register();
 
 		if ( is_admin() ) {
 			( new NetworkAdminPage( $settings, $revisions, $preview ) )->register();
 			( new EditSiteScreen( $settings ) )->register();
-			( new RestController( $settings, $revisions, $exemption, $preview ) )->register();
 		}
 	}
 }
