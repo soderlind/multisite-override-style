@@ -29,6 +29,16 @@ define( 'MOS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 require_once MOS_PLUGIN_DIR . 'vendor/autoload.php';
 
+// Initialize GitHub Updater for automatic updates.
+\Soderlind\WordPress\GitHubUpdater::init(
+	github_url:   'https://github.com/soderlind/multisite-override-style',
+	plugin_file:  __FILE__,
+	plugin_slug:  'multisite-override-style',
+	name_regex:   '/multisite-override-style\.zip/',
+	branch:       'main',
+	check_period: 6,
+);
+
 add_action( 'plugins_loaded', static function (): void {
 	( new \MultisiteOverrideStyle\Plugin() )->init();
 } );
