@@ -4,7 +4,7 @@ Tags: multisite, network, css, theme.json, branding, global styles
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 0.4.1
+Stable tag: 0.4.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,9 @@ Yes. Click **Preview on site** to open a new tab with your unsaved changes appli
 5. Revision history with one-click restore
 
 == Changelog ==
+
+= 0.4.2 =
+* Refactor: Unified Save button now saves theme overrides with global settings.
 
 = 0.4.1 =
 * Fix: Add __next40pxDefaultSize to SelectControl for WP 7.1 compatibility.

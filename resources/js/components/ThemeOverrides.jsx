@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 import {
 	SelectControl,
 	Button,
@@ -9,84 +9,54 @@ import {
 import { __ } from '@wordpress/i18n';
 import CssEditor from './CssEditor';
 import ThemeJsonEditor from './ThemeJsonEditor';
-import {
-	getNetworkThemes,
-	getThemeOverrides,
-	saveThemeOverride,
-	deleteThemeOverride,
-} from '../api';
 
-export default function ThemeOverrides() {
-	const [ themes, setThemes ] = useState( [] );
-	const [ overrides, setOverrides ] = useState( {} );
+/**
+ * Controlled component for theme-specific overrides.
+ *
+ * @param {Object}   props
+ * @param {Array}    props.themes           - List of network themes.
+ * @param {Object}   props.overrides        - All theme overrides keyed by slug.
+ * @param {Function} props.onOverrideChange - Called with (slug, override) when override changes.
+ * @param {Function} props.onDelete         - Called with (slug) to delete an override.
+ * @param {boolean}  props.loading          - Whether data is still loading.
+ * @param {boolean}  props.deleting         - Whether a delete is in progress.
+ */
+export default function ThemeOverrides( {
+	themes,
+	overrides,
+	onOverrideChange,
+	onDelete,
+	loading,
+	deleting,
+} ) {
 	const [ selectedTheme, setSelectedTheme ] = useState( '' );
-	const [ currentOverride, setCurrentOverride ] = useState( {
+
+	// Auto-select first theme when themes load.
+	if ( themes.length > 0 && ! selectedTheme ) {
+		setSelectedTheme( themes[ 0 ].slug );
+	}
+
+	const currentOverride = overrides[ selectedTheme ] ?? {
 		css: '',
 		theme_json: {},
-	} );
-	const [ loading, setLoading ] = useState( true );
-	const [ saving, setSaving ] = useState( false );
-	const [ saved, setSaved ] = useState( false );
-	const [ error, setError ] = useState( null );
-
-	const load = useCallback( async () => {
-		setLoading( true );
-		try {
-			const [ themesData, overridesData ] = await Promise.all( [
-				getNetworkThemes(),
-				getThemeOverrides(),
-			] );
-			setThemes( themesData );
-			setOverrides( overridesData );
-
-			// Auto-select first theme if available.
-			if ( themesData.length > 0 && ! selectedTheme ) {
-				const first = themesData[ 0 ].slug;
-				setSelectedTheme( first );
-				setCurrentOverride(
-					overridesData[ first ] ?? { css: '', theme_json: {} }
-				);
-			}
-		} catch ( e ) {
-			setError( e.message ?? __( 'Failed to load themes.', 'multisite-override-style' ) );
-		} finally {
-			setLoading( false );
-		}
-	}, [] );
-
-	useEffect( () => {
-		load();
-	}, [ load ] );
+	};
 
 	const handleThemeChange = ( slug ) => {
 		setSelectedTheme( slug );
-		setCurrentOverride( overrides[ slug ] ?? { css: '', theme_json: {} } );
-		setSaved( false );
 	};
 
-	const handleSave = async () => {
-		if ( ! selectedTheme ) {
-			return;
-		}
-
-		setSaving( true );
-		setSaved( false );
-		try {
-			await saveThemeOverride( selectedTheme, currentOverride );
-			setOverrides( {
-				...overrides,
-				[ selectedTheme ]: currentOverride,
-			} );
-			setSaved( true );
-			setTimeout( () => setSaved( false ), 3000 );
-		} catch ( e ) {
-			setError( e.message ?? __( 'Save failed.', 'multisite-override-style' ) );
-		} finally {
-			setSaving( false );
-		}
+	const handleCssChange = ( css ) => {
+		onOverrideChange( selectedTheme, { ...currentOverride, css } );
 	};
 
-	const handleDelete = async () => {
+	const handleThemeJsonChange = ( themeJson ) => {
+		onOverrideChange( selectedTheme, {
+			...currentOverride,
+			theme_json: themeJson,
+		} );
+	};
+
+	const handleDelete = () => {
 		if ( ! selectedTheme ) {
 			return;
 		}
@@ -99,20 +69,7 @@ export default function ThemeOverrides() {
 			return;
 		}
 
-		setSaving( true );
-		try {
-			await deleteThemeOverride( selectedTheme );
-			const newOverrides = { ...overrides };
-			delete newOverrides[ selectedTheme ];
-			setOverrides( newOverrides );
-			setCurrentOverride( { css: '', theme_json: {} } );
-			setSaved( true );
-			setTimeout( () => setSaved( false ), 3000 );
-		} catch ( e ) {
-			setError( e.message ?? __( 'Delete failed.', 'multisite-override-style' ) );
-		} finally {
-			setSaving( false );
-		}
+		onDelete( selectedTheme );
 	};
 
 	if ( loading ) {
@@ -157,17 +114,6 @@ export default function ThemeOverrides() {
 
 	return (
 		<div className="mos-theme-overrides">
-			{ error && (
-				<Notice status="error" onRemove={ () => setError( null ) }>
-					{ error }
-				</Notice>
-			) }
-			{ saved && (
-				<Notice status="success" isDismissible={ false }>
-					{ __( 'Theme override saved.', 'multisite-override-style' ) }
-				</Notice>
-			) }
-
 			<p className="description">
 				{ __(
 					'Add CSS or theme.json overrides that apply only to specific themes. These are applied after the global overrides.',
@@ -195,53 +141,38 @@ export default function ThemeOverrides() {
 								{ tab.name === 'css' && (
 									<CssEditor
 										value={ currentOverride.css }
-										onChange={ ( css ) =>
-											setCurrentOverride( {
-												...currentOverride,
-												css,
-											} )
-										}
+										onChange={ handleCssChange }
 									/>
 								) }
 								{ tab.name === 'theme-json' && (
 									<ThemeJsonEditor
 										value={ currentOverride.theme_json }
-										onChange={ ( theme_json ) =>
-											setCurrentOverride( {
-												...currentOverride,
-												theme_json,
-											} )
-										}
+										onChange={ handleThemeJsonChange }
 									/>
 								) }
 							</div>
 						) }
 					</TabPanel>
 
-					<div
-						className="mos-theme-overrides__actions"
-						style={ { marginTop: '1rem', display: 'flex', gap: '0.5rem' } }
-					>
-						<Button
-							variant="primary"
-							onClick={ handleSave }
-							isBusy={ saving }
-							disabled={ saving }
+					{ hasOverride && (
+						<div
+							className="mos-theme-overrides__actions"
+							style={ { marginTop: '1rem' } }
 						>
-							{ __( 'Save Theme Override', 'multisite-override-style' ) }
-						</Button>
-
-						{ hasOverride && (
 							<Button
 								variant="secondary"
 								isDestructive
 								onClick={ handleDelete }
-								disabled={ saving }
+								isBusy={ deleting }
+								disabled={ deleting }
 							>
-								{ __( 'Delete Override', 'multisite-override-style' ) }
+								{ __(
+									'Delete Override',
+									'multisite-override-style'
+								) }
 							</Button>
-						) }
-					</div>
+						</div>
+					) }
 				</>
 			) }
 		</div>
