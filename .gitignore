@@ -2,9 +2,6 @@
 /vendor/
 /node_modules/
 
-# Build output
-/build/
-
 # PHPUnit
 .phpunit.result.cache
 /coverage/
