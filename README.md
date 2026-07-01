@@ -34,6 +34,14 @@ Network-wide CSS and `theme.json` overrides for WordPress Multisite. Enforce bra
 
 The plugin includes automatic updates — you'll see new versions in WordPress like any other plugin.
 
+### Via Composer
+
+```bash
+composer require soderlind/network-style-override
+```
+
+> **Note:** Requires a Composer-based WordPress setup (e.g., Bedrock) with a repository pointing to Packagist or a custom VCS repository.
+
 ### For Development
 
 ```bash
