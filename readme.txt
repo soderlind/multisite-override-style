@@ -4,7 +4,7 @@ Tags: multisite, network, css, theme.json, branding, global styles
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 0.7.1
+Stable tag: 1.0.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,11 @@ Yes. Click **Preview on site** to open a new tab with your unsaved changes appli
 5. Revision history with one-click restore
 
 == Changelog ==
+
+= 1.0.0 =
+* Add: Composer installation instructions in README.
+* Add: Keywords to composer.json for package discoverability.
+* Fix: Rename mosAdminData to nsoAdminData for namespace consistency.
 
 = 0.7.1 =
 * Fix: Update JS container ID to match PHP (mos-admin-app → nso-admin-app).

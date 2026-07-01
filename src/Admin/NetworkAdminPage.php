@@ -93,7 +93,7 @@ final class NetworkAdminPage {
 
 		wp_localize_script(
 			'nso-admin',
-			'mosAdminData',
+			'nsoAdminData',
 			[
 				'restUrl'   => esc_url_raw( rest_url( 'nso/v1' ) ),
 				'nonce'     => wp_create_nonce( 'wp_rest' ),

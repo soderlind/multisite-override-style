@@ -129,7 +129,7 @@ export default function App() {
 			const { token, preview_url } = await createPreview( {
 				css: settings.css,
 				theme_json: settings.theme_json,
-				site_url: window.mosAdminData?.siteUrl ?? '',
+				site_url: window.nsoAdminData?.siteUrl ?? '',
 			} );
 			setPreviewToken( token );
 			window.open( preview_url, '_blank', 'noopener,noreferrer' );

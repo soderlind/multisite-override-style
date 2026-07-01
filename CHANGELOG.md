@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-07-01
+
+### Added
+
+- Composer installation instructions in README.
+- Keywords to composer.json for package discoverability.
+
+### Fixed
+
+- Rename `mosAdminData` to `nsoAdminData` for namespace consistency.
+
 ## [0.7.1] - 2026-06-30
 
 ### Fixed

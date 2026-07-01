@@ -1,6 +1,6 @@
 import apiFetch from '@wordpress/api-fetch';
 
-const { restUrl, nonce } = window.mosAdminData ?? {};
+const { restUrl, nonce } = window.nsoAdminData ?? {};
 
 apiFetch.use( apiFetch.createRootURLMiddleware( restUrl ) );
 apiFetch.use( apiFetch.createNonceMiddleware( nonce ) );
